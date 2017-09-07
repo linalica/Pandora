@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Pandora:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="Pandora.war">
+      <element id="artifact" artifact-name="Pandora:war exploded" />
+    </root>
+  </artifact>
+</component>
