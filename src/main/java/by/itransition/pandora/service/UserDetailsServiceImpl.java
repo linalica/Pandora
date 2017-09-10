@@ -1,6 +1,5 @@
 package by.itransition.pandora.service;
 
-import by.itransition.pandora.model.Role;
 import by.itransition.pandora.model.User;
 import by.itransition.pandora.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,8 @@ import java.util.Set;
 /**
  * Implementation of {@link UserDetailsService} interface.
  *
- * @author Eugene Suleimanov
+ * @author Gulevich Ulyana
+ * @author Ematinov Kirill
  * @version 1.0
  */
 
@@ -32,9 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        for (Role role : user.getRoles()) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
+        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().name()));
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }

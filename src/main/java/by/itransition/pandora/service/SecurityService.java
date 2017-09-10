@@ -3,7 +3,8 @@ package by.itransition.pandora.service;
 /**
  * Service for Security.
  *
- * @author Eugene Suleimanov
+ * @author Gulevich Ulyana
+ * @author Ematinov Kirill
  * @version 1.0
  */
 

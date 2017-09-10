@@ -6,7 +6,8 @@ import by.itransition.pandora.model.User;
 /**
  * Service class for {@link by.itransition.pandora.model.User}
  *
- * @author Eugene Suleimanov
+ * @author Gulevich Ulyana
+ * @author Ematinov Kirill
  * @version 1.0
  */
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author Gulevich Ulyana
+ * @author Ematinov Kirill
  * @version 1.0
  */
 @Controller
@@ -58,7 +59,6 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
-
         return "welcome";
     }
 
