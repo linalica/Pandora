@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 /**
  * Implementation of {@link UserService} interface.
  *
@@ -28,11 +31,34 @@ public class UserServiceImpl implements UserService {
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRole(UserRole.ROLE_USER);
+        user.setEnabled(true);
+        user.setCreatingTime(Timestamp.valueOf(LocalDateTime.now()));
+
+        System.out.println("-- UserServiceImpl | save");
+        System.out.println("user: " + user);
+
         userRepository.save(user);
     }
 
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    /*@Override
+    public void setLastLoginTime(Timestamp lastLoginTime, String username) {
+        userRepository.updateLastLoginTimeByUsername(lastLoginTime, username);
+    }*/
+
+
+
+    public void updateLastLoginByUsername(String username){
+
+        User user = findByUsername(username);
+        user.setLastLoginTime(Timestamp.valueOf(LocalDateTime.now()));
+        save(user);
+
+        System.out.println("-- UserServiceImpl | updateLastLoginByUsername");
+        System.out.println("user: " + user);
     }
 }

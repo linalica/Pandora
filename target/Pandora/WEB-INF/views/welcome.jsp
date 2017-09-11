@@ -18,6 +18,8 @@
 </head>
 <body>
 
+<%@include file="../../WEB-INF/jspf/header.jsp" %>
+
 <div class="container">
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -31,6 +33,8 @@
     </c:if>
 
 </div>
+
+<%@include file="../../WEB-INF/jspf/footer.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>

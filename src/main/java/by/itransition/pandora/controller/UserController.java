@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
+ *
  * @author Gulevich Ulyana
  * @author Ematinov Kirill
  * @version 1.0
@@ -54,6 +55,12 @@ public class UserController {
         if (logout != null) {
             model.addAttribute("message", "Logged out successfully.");
         }
+        return "login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(Model model) {
+        System.err.println("--login-POST");
         return "login";
     }
 
