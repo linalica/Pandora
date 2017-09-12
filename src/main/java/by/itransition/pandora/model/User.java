@@ -58,6 +58,9 @@ public class User {
     @Column(name = "user_last_login_time")
     private Timestamp lastLoginTime;
 
+    @Column(name = "user_locale")
+    private String locale;
+
     @Override
     public String toString() {
         return "User{" +
@@ -74,6 +77,7 @@ public class User {
                 ", birthday=" + birthday +
                 ", creatingTime=" + creatingTime +
                 ", lastLoginTime=" + lastLoginTime +
+                ", locale='" + locale + '\'' +
                 '}';
     }
 
@@ -103,7 +107,9 @@ public class User {
             return false;
         if (getCreatingTime() != null ? !getCreatingTime().equals(user.getCreatingTime()) : user.getCreatingTime() != null)
             return false;
-        return getLastLoginTime() != null ? getLastLoginTime().equals(user.getLastLoginTime()) : user.getLastLoginTime() == null;
+        if (getLastLoginTime() != null ? !getLastLoginTime().equals(user.getLastLoginTime()) : user.getLastLoginTime() != null)
+            return false;
+        return getLocale() != null ? getLocale().equals(user.getLocale()) : user.getLocale() == null;
     }
 
     @Override
@@ -121,11 +127,17 @@ public class User {
         result = 31 * result + (getBirthday() != null ? getBirthday().hashCode() : 0);
         result = 31 * result + (getCreatingTime() != null ? getCreatingTime().hashCode() : 0);
         result = 31 * result + (getLastLoginTime() != null ? getLastLoginTime().hashCode() : 0);
+        result = 31 * result + (getLocale() != null ? getLocale().hashCode() : 0);
         return result;
     }
 
     public Long getId() {
+
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -222,5 +234,13 @@ public class User {
 
     public void setLastLoginTime(Timestamp lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+    }
+
+    public String getLocale() {
+        return locale;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
     }
 }

@@ -373,17 +373,16 @@ projects_project_id</ColNames>
       <Position>12</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <column id="93" parent="21" name="user_language">
+    <column id="93" parent="21" name="user_theme">
       <Position>13</Position>
-      <DataType>enum(&apos;russian&apos;, &apos;english&apos;)|0</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>&apos;english&apos;</DefaultExpression>
-    </column>
-    <column id="94" parent="21" name="user_theme">
-      <Position>14</Position>
       <DataType>enum(&apos;light&apos;, &apos;dark&apos;)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;light&apos;</DefaultExpression>
+    </column>
+    <column id="94" parent="21" name="user_locale">
+      <Position>14</Position>
+      <DataType>enum(&apos;en-US&apos;, &apos;ru-RU&apos;)|0</DataType>
+      <DefaultExpression>&apos;en-US&apos;</DefaultExpression>
     </column>
     <index id="95" parent="21" name="user_email_UNIQUE">
       <ColNames>user_email</ColNames>

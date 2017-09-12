@@ -33,75 +33,17 @@
             </ul>
 
             <%--sign in & sign up--%>
-            <total:guest role="${visitor.role}">
-                <form class="navbar-form navbar-right">
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#signUpModal">
-                        <fmt:message key="label.sign.up"/>
-                    </button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#signInModal">
-                        <fmt:message key="label.sign.in"/>
-                    </button>
-                </form>
-            </total:guest>
+            <form class="navbar-form navbar-right">
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#signUpModal">
+                    <fmt:message key="label.sign.up"/>
+                </button>
+                <button type="buttfon" class="btn btn-default" data-toggle="modal" data-target="#signInModal">
+                    <fmt:message key="label.sign.in"/>
+                </button>
+            </form>
 
-            <total:notguest role="${visitor.role}">
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><fmt:message key="label.settings"/><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <total:user role="${visitor.role}">
-                                <li class="text-center"><a href="${context}/jsp/user/addMoney.jsp"><fmt:message
-                                        key="label.add.money"/></a>
-                                </li>
-                                <li class="text-center"><a href="${context}/jsp/user/betList.jsp"><fmt:message
-                                        key="label.my.bets"/></a>
-                                </li>
-                            </total:user>
-                            <li class="text-center"><a href="${context}/jsp/user/editProfile.jsp"><fmt:message
-                                    key="label.edit.profile"/></a>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li class="text-center"><a href="${context}/controller?command=signOut"><fmt:message
-                                    key="label.sign.out"/></a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <total:user role="${visitor.role}">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="${context}/jsp/user/addMoney.jsp">${account.money}</a></li>
-                    </ul>
-                </total:user>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <a class="head" data-toggle="modal" data-target="#changeAvatarModal">
-                        <img class="img-circle" height="45" width="45"
-                             src="${context}/controller?command=loadImage&src=account"
-                             alt="Avatar">
-                    </a>
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="${context}/jsp/user/profile.jsp">${account.name} ${account.surname}</a></li>
-                </ul>
-
-                <total:admin role="${visitor.role}">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false"><fmt:message key="label.race"/><span
-                                    class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="text-center"><a href="${context}/jsp/admin/createRace.jsp"><fmt:message
-                                        key="label.create.race"/></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </total:admin>
-            </total:notguest>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </header>
@@ -117,25 +59,25 @@
             <div class="modal-body">
                 <form id="signUpForm" class="form-horizontal" action="${context}/controller" method="post">
                     <div class="form-group has-feedback">
-                        <label class="control-label col-xs-4"><fmt:message key="label.name"/></label>
+                        <label class="control-label col-xs-4"><fmt:message key="label.first.name"/></label>
                         <div class="col-xs-6">
                             <div class="input-group">
                                 <input type="text" class="form-control inputSignUp" required="required"
                                        name="signUpName"
                                        pattern="^([A-Za-zА-Яа-яЁё]|[0-9])([A-Za-zА-Яа-яЁё]|[0-9]|[_`\s])*$"
-                                       placeholder="<fmt:message key="label.name"/>">
+                                       placeholder="<fmt:message key="label.first.name"/>">
                             </div>
                             <span class="glyphicon form-control-feedback"></span>
                         </div>
                     </div>
                     <div class="form-group has-feedback">
-                        <label class="control-label col-xs-4"><fmt:message key="label.surname"/></label>
+                        <label class="control-label col-xs-4"><fmt:message key="label.last.name"/></label>
                         <div class="col-xs-6">
                             <div class="input-group">
                                 <input type="text" class="form-control inputSignUp" required="required"
                                        name="signUpSurname"
                                        pattern="^([A-Za-zА-Яа-яЁё]|[0-9])([A-Za-zА-Яа-яЁё]|[0-9]|[_`\s])*$"
-                                       placeholder="<fmt:message key="label.surname"/>">
+                                       placeholder="<fmt:message key="label.last.name"/>">
                             </div>
                             <span class="glyphicon form-control-feedback"></span>
                         </div>
@@ -177,7 +119,7 @@
                         </div>
                     </div>
                     <div class="form-group has-feedback">
-                        <label class="control-label col-xs-4"><fmt:message key="label.repeat.password"/></label>
+                        <label class="control-label col-xs-4"><fmt:message key="label.confirm.password"/></label>
                         <div class="col-xs-6">
                             <div class="input-group">
                                 <input type="password" class="form-control inputSignUp" required="required"
@@ -245,6 +187,7 @@
                     <input type="hidden" name="command" value="signIn">
                 </form>
             </div>
+
             <div class="modal-footer">
                 <div class="alert alert-danger hidden" id="error-alert-sign-in">
                     <div><fmt:message key="message.sign.in.incorrect.username.or.password"/></div>
@@ -258,6 +201,7 @@
     </div>
 </div>
 
+<%--
 <div class="modal fade" id="changeAvatarModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -296,3 +240,4 @@
         </div>
     </div>
 </div>
+--%>
