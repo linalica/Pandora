@@ -17,5 +17,7 @@ public interface UserService {
 
     User findByUsername(String username);
 
-    /*void setLastLoginTime(Timestamp lastLoginTime, String username);*/
+    void updateLastLoginByUsername(String username);
+
+    void updateLocaleByUsername(String username, String locale);
 }

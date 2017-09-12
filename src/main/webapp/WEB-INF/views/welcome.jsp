@@ -7,7 +7,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-<fmt:setLocale value = "en_US"/>
+<fmt:setLocale value = "${visitor.locale}"/>
 <fmt:setBundle basename="properties.content"/>
 
 <html>
@@ -32,10 +32,8 @@
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
-
         <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
         </h2>
-
     </c:if>
 
 </div>

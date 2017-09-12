@@ -20,13 +20,13 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><fmt:message key="label.lang"/><span class="caret"></span></a>
+                       aria-expanded="false"><fmt:message key="locale.name.language"/><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="text-center"><a
-                                href="${context}/controller?command=changeLocale&locale=en_US"><fmt:message
+                                href="${contextPath}/locale?locale=en_US"><fmt:message
                                 key="label.language.english"/></a></li>
                         <li class="text-center"><a
-                                href="${context}/controller?command=changeLocale&locale=ru_RU"><fmt:message
+                                href="${contextPath}/locale?locale=ru_RU"><fmt:message
                                 key="label.language.russian"/></a></li>
                     </ul>
                 </li>
@@ -41,6 +41,11 @@
                     <fmt:message key="label.sign.in"/>
                 </button>
             </form>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="text-center"><a href="${contextPath}/locale">Locale</a></li>
+                </ul>
+
 
 
 

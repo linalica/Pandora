@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(true);
         user.setCreatingTime(Timestamp.valueOf(LocalDateTime.now()));
 
+        //TODO: remove this
         System.out.println("-- UserServiceImpl | save");
         System.out.println("user: " + user);
 
@@ -45,20 +46,18 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username);
     }
 
-    /*@Override
-    public void setLastLoginTime(Timestamp lastLoginTime, String username) {
-        userRepository.updateLastLoginTimeByUsername(lastLoginTime, username);
-    }*/
 
-
-
-    public void updateLastLoginByUsername(String username){
-
+    @Override
+    public void updateLastLoginByUsername(String username) { //TODO: updateLastLoginByUsername?
         User user = findByUsername(username);
         user.setLastLoginTime(Timestamp.valueOf(LocalDateTime.now()));
         save(user);
+    }
 
-        System.out.println("-- UserServiceImpl | updateLastLoginByUsername");
-        System.out.println("user: " + user);
+    @Override
+    public void updateLocaleByUsername(String username, String locale) { //TODO: updateLocaleLoginByUsername?
+        User user = findByUsername(username);
+        user.setLocale(locale);
+        save(user);
     }
 }

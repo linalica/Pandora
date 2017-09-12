@@ -1,4 +1,4 @@
-package by.itransition.pandora.service;
+package by.itransition.pandora.security;
 
 /**
  * Service for Security.

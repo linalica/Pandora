@@ -7,7 +7,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-<fmt:setLocale value="en_US"/>
+<fmt:setLocale value="${visitor.locale}"/>
 <fmt:setBundle basename="properties.content"/>
 
 <html>

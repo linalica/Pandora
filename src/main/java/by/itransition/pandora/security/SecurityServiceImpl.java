@@ -1,4 +1,4 @@
-package by.itransition.pandora.service;
+package by.itransition.pandora.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

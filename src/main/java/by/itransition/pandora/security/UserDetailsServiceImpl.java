@@ -1,4 +1,4 @@
-package by.itransition.pandora.service;
+package by.itransition.pandora.security;
 
 import by.itransition.pandora.model.User;
 import by.itransition.pandora.repository.UserRepository;
@@ -34,11 +34,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().name()));
 
-        org.springframework.security.core.userdetails.User u = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        //TODO: remove this
+        CrmUserDetails u = new CrmUserDetails(user);
         System.out.println("-- UserDetailsServiceImpl | loadUserByUsername");
         System.out.println("user: " + user);
         System.out.println("u: " + u);
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        //return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        return u;
     }
 }
