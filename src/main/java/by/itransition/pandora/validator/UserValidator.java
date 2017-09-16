@@ -13,7 +13,8 @@ import org.springframework.validation.Validator;
  * Validator for {@link  .pandora.model.User} class,
  * implements {@link Validator} interface.
  *
- * @author Eugene Suleimanov
+ * @author Gulevich Ulyana
+ * @author Ematinov Kirill
  * @version 1.0
  */
 

@@ -25,7 +25,7 @@
     </authentication-manager>
 
     <beans:bean id="userDetailsServiceImpl"
-                class="by.itransition.pandora.service.UserDetailsServiceImpl"></beans:bean>
+                class="by.itransition.pandora.security.UserDetailsServiceImpl"></beans:bean>
 
     <beans:bean id="encoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
