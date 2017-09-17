@@ -1,10 +1,11 @@
 package by.itransition.pandora.security.service;
 
-import by.itransition.pandora.security.exception.InvalidTokenAuthenticationException;
-import by.itransition.pandora.security.model.TokenPayload;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import by.itransition.pandora.security.exception.InvalidTokenAuthenticationException;
+import by.itransition.pandora.security.model.TokenPayload;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.jwt.Jwt;
 import org.springframework.security.jwt.JwtHelper;
@@ -29,7 +30,7 @@ public class AuthenticationHelper {
 
     private Long tokenExpirationTime = 3600L;
 
-
+    @Autowired
     private  ObjectMapper objectMapper;
 
     public String generateToken(final Long userId) {

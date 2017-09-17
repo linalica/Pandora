@@ -1,5 +1,6 @@
 package by.itransition.pandora.security.service;
 
+import by.itransition.pandora.repository.UserRepository;
 import by.itransition.pandora.model.User;
 import by.itransition.pandora.repository.UserRepository;
 import by.itransition.pandora.security.exception.ExpiredTokenAuthenticationException;
@@ -29,6 +30,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private  UserRepository userRepository;
 
+    @Autowired
     private  AuthenticationHelper authenticationHelper;
 
     @Override

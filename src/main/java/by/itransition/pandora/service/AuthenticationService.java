@@ -1,15 +1,18 @@
+/*
 package by.itransition.pandora.service;
 
-import by.itransition.pandora.model.User;
 import by.itransition.pandora.repository.UserRepository;
-import by.itransition.pandora.security.SecurityHelper;
-import by.itransition.pandora.security.model.JwtUserDetails;
-import by.itransition.pandora.security.service.AuthenticationHelper;
-import by.itransition.pandora.service.dto.AuthUserDto;
-import by.itransition.pandora.service.dto.JsonException;
-import by.itransition.pandora.service.dto.LoginRequestDto;
-import by.itransition.pandora.service.dto.LoginResponseDto;
 import by.itransition.pandora.service.transformer.AuthUserTransformer;
+import com.spring.jwt.model.User;
+import com.spring.jwt.repository.UserRepository;
+import com.spring.jwt.security.SecurityHelper;
+import com.spring.jwt.security.model.JwtUserDetails;
+import com.spring.jwt.security.service.AuthenticationHelper;
+import com.spring.jwt.service.dto.AuthUserDto;
+import com.spring.jwt.service.dto.JsonException;
+import com.spring.jwt.service.dto.LoginRequestDto;
+import com.spring.jwt.service.dto.LoginResponseDto;
+import com.spring.jwt.service.transformer.AuthUserTransformer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,22 +21,32 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.net.www.protocol.http.AuthenticationHeader;
 
 import java.util.Objects;
 import java.util.Optional;
 
+*/
 /**
  * @author ikatlinsky
  * @since 5/12/17
- */
+ *//*
+
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class AuthenticationService {
+
     @Autowired
     private  UserRepository userRepository;
+
+    @Autowired
     private  AuthUserTransformer authUserTransformer;
-    private  AuthenticationHelper authenticationHelper;
+
+    @Autowired
+    private A authenticationHelper;
+
+    @Autowired
     private  AuthenticationManager authenticationManager;
 
     public LoginResponseDto login(final LoginRequestDto loginRequestDto) {
@@ -71,10 +84,12 @@ public class AuthenticationService {
         }
     }
 
-    /**
+    */
+/**
      * Get user info.
      * @return user info.
-     */
+     *//*
+
     @Transactional(readOnly = true)
     public AuthUserDto getMe() {
         Authentication authentication = SecurityHelper.getAuthenticationWithCheck();
@@ -83,3 +98,4 @@ public class AuthenticationService {
         return authUserTransformer.makeDto(byUsername);
     }
 }
+*/

@@ -1,17 +1,12 @@
 package by.itransition.pandora.security.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 /**
  * @author ikatlinsky
  * @since 5/12/17
  */
-@Getter
-@Setter
-@NoArgsConstructor
+
 public class TokenPayload {
+
     private Long userId;
     private long exp;
 
@@ -20,7 +15,34 @@ public class TokenPayload {
         this.exp = exp;
     }
 
+    @Override
+    public String toString() {
+        return "TokenPayload{" +
+                "userId=" + userId +
+                ", exp=" + exp +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TokenPayload)) return false;
+
+        TokenPayload that = (TokenPayload) o;
+
+        if (getExp() != that.getExp()) return false;
+        return getUserId() != null ? getUserId().equals(that.getUserId()) : that.getUserId() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getUserId() != null ? getUserId().hashCode() : 0;
+        result = 31 * result + (int) (getExp() ^ (getExp() >>> 32));
+        return result;
+    }
+
     public Long getUserId() {
+
         return userId;
     }
 
