@@ -1,4 +1,4 @@
-package by.itransition.pandora.config;
+package by.itransition.pandora.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

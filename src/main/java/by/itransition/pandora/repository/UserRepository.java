@@ -19,7 +19,7 @@ import java.util.List;
 
 @Repository
 @RepositoryRestResource(path = "users", collectionResourceRel = "users")
-public interface UserRepository extends JpaRepository<User, Long>, CrudRepository<User, Long>, JpaSpecificationExecutor<User> {
+public interface UserRepository extends JpaRepository<User, Long>/*, CrudRepository<User, Long>, JpaSpecificationExecutor<User> */{
 
     User findByUsername(String username);
 

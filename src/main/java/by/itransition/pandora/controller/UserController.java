@@ -6,6 +6,7 @@ import by.itransition.pandora.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -23,10 +24,29 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/lol")
+    @RequestMapping(value = "/lol",  method = RequestMethod.POST)
     String lol(String s) {
         User user = userRepository.findByUsername("proselyte5");
         System.out.println("POST lol: " + user);
+        /*List<UserListDto> users = userService.findAll();
+        Iterator<UserListDto> it = users.iterator();
+        while(it.hasNext()){
+            System.out.println("- | " + it.next());
+        }*/
+
+        return "Hello, my darling!";
+    }
+
+    @RequestMapping(value = "/lol",  method = RequestMethod.GET)
+    String lol() {
+        User user = userRepository.findByUsername("proselyte5");
+        System.out.println("GET lol: " + user);
+        /*List<UserListDto> users = userService.findAll();
+        Iterator<UserListDto> it = users.iterator();
+        while(it.hasNext()){
+            System.out.println("- | " + it.next());
+        }*/
+
         return "Hello, my darling!";
     }
 

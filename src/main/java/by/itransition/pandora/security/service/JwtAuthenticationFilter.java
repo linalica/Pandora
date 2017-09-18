@@ -24,6 +24,11 @@ import java.util.Optional;
  */
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
+    {
+        //TODO: remove this!
+        System.out.println("--- JwtAuthenticationFilter -----!");
+    }
+
     public JwtAuthenticationFilter(final AuthenticationManager authenticationManager) {
         super(request -> true);
         setAuthenticationManager(authenticationManager);
@@ -34,19 +39,34 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     public Authentication attemptAuthentication(final HttpServletRequest request, final HttpServletResponse response)
         throws IOException, ServletException {
         try {
+            System.out.println("--- JwtAuthenticationFilter | attemptAuthentication -----!");
+
+           /* Enumeration<String> nam = request.getHeaderNames();
+            while(nam.hasMoreElements()){
+                String h = nam.nextElement();
+                System.out.println("- |" + h + " | " + request.getHeader(h));
+            }
+*/
             // Getting JWT token from request
             String token = Optional.ofNullable(request.getHeader(AuthenticationHelper.AUTHENTICATION_HEADER))
                     .map(header -> header.substring(7)).orElse(null);
+            System.out.println("--- JwtAuthenticationFilter | token: " + token);
 
             if (Objects.isNull(token)) {
+                System.out.println("--- JwtAuthenticationFilter | BadCredentialsException, token==null ");
                 throw new BadCredentialsException("Token not found in request's header.");
             }
 
             // Create token for authentication provider
             JwtAuthenticationToken authRequest = new JwtAuthenticationToken(token);
+            System.out.println("--- JwtAuthenticationFilter | authRequest: " + authRequest);
+
+            Authentication auth = this.getAuthenticationManager().authenticate(authRequest);
+            System.out.println("--- JwtAuthenticationFilter | auth: " + auth);
+
 
             // Return a fully authenticated object
-            return this.getAuthenticationManager().authenticate(authRequest);
+            return auth;
         } catch (AuthenticationException exception) {
             // Go to 401 error page if exception thrown
             unsuccessfulAuthentication(request, response, exception);
@@ -58,6 +78,9 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     protected void successfulAuthentication(final HttpServletRequest request, final HttpServletResponse response,
                                             final FilterChain chain, final Authentication authResult)
         throws IOException, ServletException {
+        System.out.println("--- JwtAuthenticationFilter | successfulAuthentication -----!");
+
+        System.out.println("--- JwtAuthenticationFilter | authResult: " + authResult);
         // Set authentication to context
         SecurityContextHolder.getContext().setAuthentication(authResult);
 

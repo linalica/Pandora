@@ -13,9 +13,17 @@ import java.io.IOException;
  */
 public class RestAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
+
+    {
+        //TODO: remove this!
+        System.out.println("--- RestAuthenticationFailureHandler -----");
+    }
+
     @Override
     public void onAuthenticationFailure(final HttpServletRequest request, final HttpServletResponse response,
                                         final AuthenticationException exception) throws IOException {
+
+        System.out.println("--- RestAuthenticationFailureHandler | onAuthenticationFailure");
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, exception.getMessage());
     }
 }

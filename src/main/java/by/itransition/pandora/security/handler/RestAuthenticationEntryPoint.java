@@ -13,9 +13,18 @@ import java.io.IOException;
  */
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
+    {
+        //TODO: remove this!
+        System.out.println("--- RestAuthenticationEntryPoint -----!");
+    }
+
+
     @Override
     public void commence(final HttpServletRequest request, final HttpServletResponse response,
                          final AuthenticationException exception) throws IOException {
+
+        System.out.println("--- RestAuthenticationEntryPoint | commence");
+
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, exception.getMessage());
     }
 }

@@ -1,27 +1,31 @@
-package by.itransition.pandora.service.dto;
+package by.itransition.pandora.service.dto.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import by.itransition.pandora.service.dto.Dto;
 
 /**
- * Dto for user list item.
- * @author d.krivenky
- * @since 27.08.2016
+ * @author i.katlinsky
+ * @since 22.07.2016
  */
-@Getter
-@Setter
-public class UserListDto implements Dto {
-
+public class AuthUserDto implements Dto {
     private long id;
     private String username;
     private String role;
 
     @Override
+    public String toString() {
+        return "AuthUserDto{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserListDto)) return false;
+        if (!(o instanceof AuthUserDto)) return false;
 
-        UserListDto that = (UserListDto) o;
+        AuthUserDto that = (AuthUserDto) o;
 
         if (getId() != that.getId()) return false;
         if (getUsername() != null ? !getUsername().equals(that.getUsername()) : that.getUsername() != null)

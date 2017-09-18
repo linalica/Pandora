@@ -1,17 +1,27 @@
-package by.itransition.pandora.config;
+package by.itransition.pandora.configuration;
 
+import by.itransition.pandora.security.handler.RestAccessDeniedHandler;
+import by.itransition.pandora.security.handler.RestAuthenticationEntryPoint;
+import by.itransition.pandora.security.service.JwtAuthenticationFilter;
+import by.itransition.pandora.security.service.JwtAuthenticationProvider;
+import by.itransition.pandora.security.service.JwtUserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -20,12 +30,20 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 @RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+
+    {
+        //TODO: remove this!
+        System.out.println("--- SecurityConfiguration -----!");
+    }
+
     // TODO: remember about value: String[] allowedUrlsForPost
-    private static final String[] allowedUrlsForPost = new String[]{ "/auth/login" };
+    private static final String[] allowedUrlsForPost = new String[]{"/auth/login"};
 
-    /*private final JwtAuthenticationProvider jwtAuthenticationProvider;*/
+    @Autowired
+    private final JwtAuthenticationProvider jwtAuthenticationProvider;
 
-/*   private  UserDetailsService userDetailsService = new JwtUserDetailsServiceImpl();
+    @Autowired
+    private final UserDetailsService userDetailsService;
 
     @Autowired
     public void configureAuthentication(final AuthenticationManagerBuilder authenticationManagerBuilder)
@@ -33,28 +51,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         authenticationManagerBuilder
                 .userDetailsService(this.userDetailsService)
                 .passwordEncoder(passwordEncoder());
-    }*/
-
-    /*<beans:bean id="userDetailsServiceImpl"
-                class="by.itransition.pandora.security.UserDetailsServiceImpl"></beans:bean>
-*/
-
-    /*@Bean
-    public  passwordEncoder() {
-        return new StandardPasswordEncoder();
     }
-*/
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new StandardPasswordEncoder();
     }
 
-    /*@Bean
+    @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-    }*/
+    }
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
@@ -62,15 +70,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("*")
-                .permitAll()
+                .antMatchers("/**").permitAll()
                 .and()
-                .csrf().disable()
-                /*.addFilterAfter(new JwtAuthenticationFilter(authenticationManagerBean()),
-                        BasicAuthenticationFilter.class)
+                .addFilterAfter(new JwtAuthenticationFilter(authenticationManagerBean()), BasicAuthenticationFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(new RestAuthenticationEntryPoint())
-                .accessDeniedHandler(new RestAccessDeniedHandler())*/;
+                .accessDeniedHandler(new RestAccessDeniedHandler())
+                .and()
+                .csrf().disable()
+//                .and().formLogin()
+//                .loginProcessingUrl("/auth/login")
+        ;
     }
 
     @Override
@@ -80,12 +90,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "*");
     }
 
-   /* @Override
+    @Override
     protected void configure(final AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
-                //.authenticationProvider(this.jwtAuthenticationProvider)
+                .authenticationProvider(this.jwtAuthenticationProvider)
                 .userDetailsService(this.userDetailsService)
                 .passwordEncoder(this.passwordEncoder());
+    }
+
+   /* @Override
+    public UserDetailsService userDetailsServiceBean() throws Exception {
+        return new JwtUserDetailsServiceImpl();
     }*/
+
 
 }

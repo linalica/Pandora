@@ -1,4 +1,4 @@
-package by.itransition.pandora.service.dto;
+package by.itransition.pandora.service.dto.exception;
 
 /**
  * @author ikatlinsky

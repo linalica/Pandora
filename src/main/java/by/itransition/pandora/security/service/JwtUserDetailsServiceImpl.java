@@ -3,7 +3,7 @@ package by.itransition.pandora.security.service;
 import by.itransition.pandora.model.User;
 import by.itransition.pandora.repository.UserRepository;
 import by.itransition.pandora.security.model.JwtUserDetails;
-import by.itransition.pandora.service.dto.JsonException;
+import by.itransition.pandora.service.dto.exception.JsonException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,9 +27,6 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User byUsername = this.userRepository.findByUsername(username);
-
-        return Optional.ofNullable(byUsername)
-                .map(JwtUserDetails::new)
-                .orElseThrow(() -> new JsonException("User nor found."));
+        return Optional.ofNullable(byUsername).map(JwtUserDetails::new).orElseThrow(() -> new JsonException("User nor found."));
     }
 }

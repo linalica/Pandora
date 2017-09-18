@@ -2,7 +2,7 @@ package by.itransition.pandora.service.transformer;
 
 
 import by.itransition.pandora.model.User;
-import by.itransition.pandora.service.dto.AuthUserDto;
+import by.itransition.pandora.service.dto.model.AuthUserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

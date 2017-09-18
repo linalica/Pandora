@@ -1,6 +1,5 @@
 package by.itransition.pandora.security.service;
 
-import by.itransition.pandora.repository.UserRepository;
 import by.itransition.pandora.model.User;
 import by.itransition.pandora.repository.UserRepository;
 import by.itransition.pandora.security.exception.ExpiredTokenAuthenticationException;
@@ -25,6 +24,11 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class JwtAuthenticationProvider implements AuthenticationProvider {
 
+    {
+        //TODO: remove this!
+        System.out.println("--- JwtAuthenticationProvider -----!");
+    }
+
     private static final long MILLIS_IN_SECOND = 1000L;
 
     @Autowired
@@ -35,11 +39,17 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(final Authentication authRequest) {
+        System.out.println("--- JwtAuthenticationProvider | authenticate -----!");
+        System.out.println("--- JwtAuthenticationProvider | authRequest: " + authRequest);
+
         // Getting string token from authentication request object
         String token = StringUtils.trimToNull((String) authRequest.getCredentials());
+        System.out.println("--- JwtAuthenticationProvider | token: " + token);
 
         //  Deserialize token
         TokenPayload tokenPayload = authenticationHelper.decodeToken(token);
+        System.out.println("--- JwtAuthenticationProvider | tokenPayload: " + tokenPayload);
+
 
         // Checking if token already expired and throwing an AuthenticationException in this case
         checkIsExpired(tokenPayload.getExp());

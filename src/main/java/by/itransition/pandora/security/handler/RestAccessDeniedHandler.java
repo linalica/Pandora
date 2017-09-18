@@ -14,9 +14,16 @@ import java.io.IOException;
 public class RestAccessDeniedHandler implements AccessDeniedHandler {
     private static final String DENIED_MESSAGE = "Sorry, you don't have required permission for this operation.";
 
+    {
+        //TODO: remove this!
+        System.out.println("--- RestAccessDeniedHandler -----");
+    }
+
+
     @Override
     public void handle(final HttpServletRequest request, final HttpServletResponse response,
                        final AccessDeniedException exception) throws IOException {
+        System.out.println("--- RestAccessDeniedHandler | handle");
         response.sendError(HttpServletResponse.SC_FORBIDDEN, DENIED_MESSAGE);
     }
 }

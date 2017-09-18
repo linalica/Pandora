@@ -1,7 +1,7 @@
 package by.itransition.pandora.service.transformer;
 
 import by.itransition.pandora.model.User;
-import by.itransition.pandora.service.dto.UserListDto;
+import by.itransition.pandora.service.dto.model.UserListDto;
 import org.springframework.stereotype.Component;
 
 /**

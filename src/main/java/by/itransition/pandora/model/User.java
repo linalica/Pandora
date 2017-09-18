@@ -61,6 +61,15 @@ public class User {
     @Column(name = "user_locale")
     private String locale;
 
+    public User() {
+    }
+
+    public User(String username, String password, UserRole role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

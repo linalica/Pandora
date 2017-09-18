@@ -1,4 +1,4 @@
-package by.itransition.pandora.config;
+package by.itransition.pandora.configuration;
 
 /**
  * @author Gulevich Ulyana
@@ -6,30 +6,31 @@ package by.itransition.pandora.config;
  */
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-
+//@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 /*@ImportResource("classpath:/product-servlet.xml")*/
-/*@EnableTransactionManagement
-@ComponentScan("by.itransition.pandora")*/
-/*@EnableJpaRepositories("by.itransition.pandora.repository")*/
-/*@EnableJpaRepositories(basePackages = {"by.itransition.pandora.repository"})*/
 @Configuration
-
+@EnableTransactionManagement
+@ComponentScan("by.itransition.pandora")
+@EnableJpaRepositories("by.itransition.pandora.repository")
 @PropertySource("classpath:properties/database.properties")
 public class DataConfiguration {
 
     {
-        //TODO: remove this!
+        //TODO: clean class from system.out.println()
         System.out.println("--- DataConfiguration -----!");
     }
 
