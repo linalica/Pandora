@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Implementation of {@link UserService} interface.
@@ -35,10 +34,9 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(true);
         user.setCreatingTime(Timestamp.valueOf(LocalDateTime.now()));
         userRepository.save(user);
-
-        //TODO: remove this
+/*      //TODO: remove this
         System.out.println("-- UserServiceImpl | save");
-        System.out.println("user: " + user);
+        System.out.println("user: " + user);*/
     }
 
     @Override
@@ -47,15 +45,26 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(true);
         user.setCreatingTime(Timestamp.valueOf(LocalDateTime.now()));
         userRepository.save(user);
-
-        //TODO: remove this
+/*      //TODO: remove this
         System.out.println("-- UserServiceImpl | update");
-        System.out.println("user: " + user);
+        System.out.println("user: " + user);*/
     }
 
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public String findUsernameById(Long id) {
+        return userRepository.findUsernameById(id);
+    }
+
+   /* public String findByUsername(String username) {
+        return userRepository.findUsernameById(username);
+    }
+*/
+    public UserRole findRoleByUsername(String username) {
+        return userRepository.findRoleByUsername(username);
     }
 
     @Override
@@ -64,24 +73,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateLocaleByUsername(String username, String locale) { //TODO: updateLocaleLoginByUsername?
+    public void updateLocaleByUsername(String username, String locale) {
         User user = findByUsername(username);
         user.setLocale(locale);
         update(user);
     }
 
     @Override
-    public void updateLastLoginByUsername(String username) { //TODO: updateLastLoginByUsername?
+    public void updateThemeByUsername(String username, String theme) {
+        User user = findByUsername(username);
+        user.setTheme(theme);
+        update(user);
+    }
+
+    @Override
+    public void updateLastLoginByUsername(String username) {
         User user = findByUsername(username);
         user.setLastLoginTime(Timestamp.valueOf(LocalDateTime.now()));
         update(user);
     }
 
     @Override
-    public List<User> findInfo() {
-        return userRepository.findInfo();
+    public void updateAvatarByUsername(String username, byte[] avatar) {
+        User user = findByUsername(username);
+        user.setAvatar(avatar);
+        update(user);
     }
-
-
 
 }

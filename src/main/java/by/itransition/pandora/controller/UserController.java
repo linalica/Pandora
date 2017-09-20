@@ -1,8 +1,10 @@
 package by.itransition.pandora.controller;
 
+import by.itransition.pandora.model.Project;
 import by.itransition.pandora.model.User;
 import by.itransition.pandora.model.Visitor;
 import by.itransition.pandora.security.SecurityService;
+import by.itransition.pandora.service.ProjectService;
 import by.itransition.pandora.service.UserService;
 import by.itransition.pandora.util.URIAnalyzer;
 import by.itransition.pandora.validator.UserValidator;
@@ -29,6 +31,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ProjectService projectService;
 
     @Autowired
     private SecurityService securityService;
@@ -65,6 +70,7 @@ public class UserController {
         userService.updateLastLoginByUsername(securityService.findLoggedInUsername());
         System.err.println("-- lastLogin: " + userService.findByUsername(securityService.findLoggedInUsername()).getLastLoginTime());
         */
+
         if (error != null) {
             model.addAttribute("error", "Username or password is incorrect.");
         }
@@ -87,6 +93,12 @@ public class UserController {
     @RequestMapping(value = "/locale", method = RequestMethod.GET)
     public String locale(Principal principal, HttpServletRequest request, String locale) {
         System.err.println("--- " + userService.findLocaleByUsername("proselyte"));
+        System.err.println("--- " + userService.findRoleByUsername("proselyte"));
+        Project project = projectService.findById(new Long(1));
+        System.err.println("--- " + project);
+        Project project2 = projectService.findFullById(new Long(1));
+        System.err.println("--- " + project2);
+        System.err.println("--- " + project2.getObjectives());
         if (principal != null) {
             String username = ((UserDetails)((UsernamePasswordAuthenticationToken)principal).getPrincipal()).getUsername();
             userService.updateLocaleByUsername(username, locale);

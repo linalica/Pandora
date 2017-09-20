@@ -33,7 +33,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.findByUsername(username);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().name()));
-
 /*        //TODO: remove this
         CrmUserDetails u = new CrmUserDetails(user);
         System.out.println("-- UserDetailsServiceImpl | loadUserByUsername");
@@ -41,6 +40,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         System.out.println("u: " + u);*/
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
-        //return u;
     }
 }

@@ -46,9 +46,6 @@
                     <li class="text-center"><a href="${contextPath}/locale">Locale</a></li>
                 </ul>
 
-
-
-
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </header>
