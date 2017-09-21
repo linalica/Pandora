@@ -1,8 +1,12 @@
 package by.itransition.pandora.service;
 
 
+import by.itransition.pandora.model.Comment;
+import by.itransition.pandora.model.Objective;
 import by.itransition.pandora.model.Project;
 import by.itransition.pandora.model.User;
+
+import java.util.List;
 
 /**
  * Service class for {@link User}
@@ -21,4 +25,19 @@ public interface ProjectService {
     Project findById(Long id);
 
     Project findFullById(Long id);
+
+    List<Objective> findProjectObjectivesById(Long id);
+
+    List<Comment> findProjectCommentsById(Long id);
+
+    List<Objective> findProjectMinObjectivesById(Long id);
+
+    Double findProjectRatingById(Long id);
+
+    void addObjective(Objective objective, Long projectId);
+
+    void addComment(Comment comment, Long projectId);
+
+    void addMark(Integer value, Long userId, Long projectId);
+
 }

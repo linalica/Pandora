@@ -186,9 +186,9 @@ projects_project_id</ColNames>
     </column>
     <column id="55" parent="16" name="project_status">
       <Position>6</Position>
-      <DataType>enum(&apos;active&apos;, &apos;financed&apos;, &apos;failed&apos;)|0</DataType>
+      <DataType>enum(&apos;ACTIVE&apos;, &apos;FINANCED&apos;, &apos;FAILED&apos;)|0</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>&apos;active&apos;</DefaultExpression>
+      <DefaultExpression>&apos;ACTIVE&apos;</DefaultExpression>
     </column>
     <column id="56" parent="16" name="project_min_objective_achieved">
       <Position>7</Position>

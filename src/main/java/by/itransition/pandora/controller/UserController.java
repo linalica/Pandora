@@ -1,8 +1,12 @@
 package by.itransition.pandora.controller;
 
+import by.itransition.pandora.model.Objective;
 import by.itransition.pandora.model.Project;
 import by.itransition.pandora.model.User;
 import by.itransition.pandora.model.Visitor;
+import by.itransition.pandora.repository.CommentRepository;
+import by.itransition.pandora.repository.MarkRepository;
+import by.itransition.pandora.repository.ObjectiveRepository;
 import by.itransition.pandora.security.SecurityService;
 import by.itransition.pandora.service.ProjectService;
 import by.itransition.pandora.service.UserService;
@@ -33,6 +37,12 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private ObjectiveRepository objectiveRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
     private ProjectService projectService;
 
     @Autowired
@@ -40,6 +50,9 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    private MarkRepository markRepository;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -60,7 +73,6 @@ public class UserController {
         securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
         return "redirect:/welcome";
     }
-
 
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -92,15 +104,27 @@ public class UserController {
 
     @RequestMapping(value = "/locale", method = RequestMethod.GET)
     public String locale(Principal principal, HttpServletRequest request, String locale) {
-        System.err.println("--- " + userService.findLocaleByUsername("proselyte"));
-        System.err.println("--- " + userService.findRoleByUsername("proselyte"));
+
         Project project = projectService.findById(new Long(1));
         System.err.println("--- " + project);
+
+        Objective o = new Objective();
+        o.setPrice(200.0);
+        o.setName("new obj");
+        o.setDescription("try to add obj");
+        projectService.addObjective(o, new Long(1));
+
         Project project2 = projectService.findFullById(new Long(1));
         System.err.println("--- " + project2);
         System.err.println("--- " + project2.getObjectives());
+
+        Project project3 = projectService.findFullById(new Long(2));
+        System.err.println("--- " + project3);
+        System.err.println("--- " + project3.getObjectives());
+
+
         if (principal != null) {
-            String username = ((UserDetails)((UsernamePasswordAuthenticationToken)principal).getPrincipal()).getUsername();
+            String username = ((UserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUsername();
             userService.updateLocaleByUsername(username, locale);
         }
         ((Visitor) request.getSession().getAttribute(ControllerConstants.VISITOR_KEY)).setLocale(locale);

@@ -3,13 +3,11 @@ package by.itransition.pandora.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-/**
- * @author Gulevich Ulyana
- * @version 1.0
- */
 @Entity
 @Table(name = "comments")
 public class Comment implements IDatabaseEntity{
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +27,6 @@ public class Comment implements IDatabaseEntity{
     private Long projectId;
 
 
-
     @Override
     public String toString() {
         return "Comment{" +
@@ -39,5 +36,45 @@ public class Comment implements IDatabaseEntity{
                 ", userId=" + userId +
                 ", projectId=" + projectId +
                 '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Timestamp getCreatingTime() {
+        return creatingTime;
+    }
+
+    public void setCreatingTime(Timestamp creatingTime) {
+        this.creatingTime = creatingTime;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 }

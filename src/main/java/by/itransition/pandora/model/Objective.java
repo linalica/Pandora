@@ -7,6 +7,8 @@ import javax.persistence.*;
 @Table(name = "objectives")
 public class Objective implements IDatabaseEntity {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "objective_id")
@@ -19,21 +21,24 @@ public class Objective implements IDatabaseEntity {
     private String description;
 
     @Column(name = "objective_balance")
-    private Double balance;
+    private Double balance = 0.0;
 
     @Column(name = "objective_price")
-    private Double price;
+    private Double price = 0.0;
 
     @Column(name = "objective_closed")
-    private Boolean closed;
+    private Boolean closed = false;
 
     @Column(name = "objective_min")
-    private Boolean min;
+    private Boolean min = false;
 
-/*    @ManyToOne
-    @JoinColumn(name = "projects_project_id")*/
+  /*  *//*    @ManyToOne
+        @JoinColumn(name = "projects_project_id")*//*
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "projects_project_id", nullable = false)    */
+
     @Column(name = "projects_project_id")
-    private Project project;
+    private Long projectId;
 
     @Override
     public String toString() {
@@ -45,7 +50,6 @@ public class Objective implements IDatabaseEntity {
                 ", price=" + price +
                 ", closed=" + closed +
                 ", min=" + min +
-                ", project=" + project +
                 '}';
     }
 
@@ -105,11 +109,11 @@ public class Objective implements IDatabaseEntity {
         this.min = min;
     }
 
-    public Project getProject() {
-        return project;
+    public Long getProjectId() {
+        return projectId;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 }

@@ -2,11 +2,14 @@ package by.itransition.pandora.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
 @Table(name = "projects")
 public class Project implements IDatabaseEntity {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,16 +30,21 @@ public class Project implements IDatabaseEntity {
 
     @Column(name = "project_status")
     @Enumerated(EnumType.STRING)
-    private ProjectStatus projectStatus;
+    private ProjectStatus projectStatus = ProjectStatus.ACTIVE;
 
     @Column(name = "project_min_objective_achieved")
-    private Boolean minObjectiveAchieved;
+    private Boolean minObjectiveAchieved = false;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    //@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @Transient
     private List<Objective> objectives;
 
-   /* @OneToMany(mappedBy = "comments", cascade = CascadeType.ALL)
-    private List<Comment> comments;*/
+    //@OneToMany(mappedBy = "comments", cascade = CascadeType.ALL)
+    @Transient
+    private List<Comment> comments;
+
+    @Transient
+    private Double rating = 0.0;
 
     @Override
     public String toString() {
@@ -44,10 +52,53 @@ public class Project implements IDatabaseEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", picture=" + Arrays.toString(picture) +
                 ", creatingTime=" + creatingTime +
                 ", projectStatus=" + projectStatus +
                 ", minObjectiveAchieved=" + minObjectiveAchieved +
+                ", objectives=" + objectives +
+                ", comments=" + comments +
+                ", rating=" + rating +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Project)) return false;
+
+        Project project = (Project) o;
+
+        if (getId() != null ? !getId().equals(project.getId()) : project.getId() != null) return false;
+        if (getName() != null ? !getName().equals(project.getName()) : project.getName() != null) return false;
+        if (getDescription() != null ? !getDescription().equals(project.getDescription()) : project.getDescription() != null)
+            return false;
+        if (!Arrays.equals(getPicture(), project.getPicture())) return false;
+        if (getCreatingTime() != null ? !getCreatingTime().equals(project.getCreatingTime()) : project.getCreatingTime() != null)
+            return false;
+        if (getProjectStatus() != project.getProjectStatus()) return false;
+        if (getMinObjectiveAchieved() != null ? !getMinObjectiveAchieved().equals(project.getMinObjectiveAchieved()) : project.getMinObjectiveAchieved() != null)
+            return false;
+        if (getObjectives() != null ? !getObjectives().equals(project.getObjectives()) : project.getObjectives() != null)
+            return false;
+        if (getComments() != null ? !getComments().equals(project.getComments()) : project.getComments() != null)
+            return false;
+        return getRating() != null ? getRating().equals(project.getRating()) : project.getRating() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + Arrays.hashCode(getPicture());
+        result = 31 * result + (getCreatingTime() != null ? getCreatingTime().hashCode() : 0);
+        result = 31 * result + (getProjectStatus() != null ? getProjectStatus().hashCode() : 0);
+        result = 31 * result + (getMinObjectiveAchieved() != null ? getMinObjectiveAchieved().hashCode() : 0);
+        result = 31 * result + (getObjectives() != null ? getObjectives().hashCode() : 0);
+        result = 31 * result + (getComments() != null ? getComments().hashCode() : 0);
+        result = 31 * result + (getRating() != null ? getRating().hashCode() : 0);
+        return result;
     }
 
     public Long getId() {
@@ -113,7 +164,24 @@ public class Project implements IDatabaseEntity {
     public void setObjectives(List<Objective> objectives) {
         this.objectives = objectives;
     }
-/*@ManyToMany(cascade = CascadeType.ALL)
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    /*@ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "book_publisher", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "publisher_id", referencedColumnName = "id"))
     public Set<Objective> getPublishers() {
         return publishers;

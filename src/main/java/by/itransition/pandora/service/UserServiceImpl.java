@@ -34,9 +34,6 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(true);
         user.setCreatingTime(Timestamp.valueOf(LocalDateTime.now()));
         userRepository.save(user);
-/*      //TODO: remove this
-        System.out.println("-- UserServiceImpl | save");
-        System.out.println("user: " + user);*/
     }
 
     @Override
@@ -45,9 +42,6 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(true);
         user.setCreatingTime(Timestamp.valueOf(LocalDateTime.now()));
         userRepository.save(user);
-/*      //TODO: remove this
-        System.out.println("-- UserServiceImpl | update");
-        System.out.println("user: " + user);*/
     }
 
     @Override

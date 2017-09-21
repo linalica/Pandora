@@ -16,6 +16,8 @@ import java.util.Arrays;
 @Table(name = "users")
 public class User implements IDatabaseEntity {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
