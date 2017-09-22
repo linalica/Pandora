@@ -12,20 +12,27 @@
         <!--<intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>-->
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
 
-        <form-login login-page="/main" default-target-url="/main" authentication-failure-url="/main?error"
-                    username-parameter="username" password-parameter="password"/>
+        <form-login login-page="/main"
+                    default-target-url="/main"
+                    authentication-failure-url="/main?error"
+                    authentication-success-handler-ref="authSuccessHandler"
+                    username-parameter="username"
+                    password-parameter="password"/>
         <logout logout-success-url="/main?logout"/>
         <csrf disabled="true"/>
     </http>
 
+
     <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDetailsServiceImpl">
-            <password-encoder ref="encoder"></password-encoder>
+            <password-encoder ref="encoder"/>
         </authentication-provider>
     </authentication-manager>
 
+    <beans:bean id="authSuccessHandler" class="by.itransition.pandora.security.AuthenticationSuccessHandlerImpl"/>
+
     <beans:bean id="userDetailsServiceImpl"
-                class="by.itransition.pandora.security.UserDetailsServiceImpl"></beans:bean>
+                class="by.itransition.pandora.security.UserDetailsServiceImpl"/>
 
     <beans:bean id="encoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">

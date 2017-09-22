@@ -23,8 +23,6 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-//@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
-/*@ImportResource("classpath:/product-servlet.xml")*/
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("by.itransition.pandora")
@@ -32,10 +30,6 @@ import java.util.Properties;
 @PropertySource("classpath:properties/database.properties")
 public class DataConfiguration {
 
-    {
-        //TODO: clean class from system.out.println()
-        System.out.println("--- DataConfiguration -----!");
-    }
 
     private static final String PROP_DATABASE_DRIVER = "db.driver";
     private static final String PROP_DATABASE_PASSWORD = "db.password";
@@ -63,22 +57,18 @@ public class DataConfiguration {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        System.out.println("--- entityManagerFactory -----");
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         entityManagerFactoryBean.setJpaProperties(hibernateProperties());
-        System.out.println("--- entityManagerFactory END");
         return entityManagerFactoryBean;
     }
 
     @Bean
     public JpaTransactionManager transactionManager() {
-        System.out.println("--- transactionManager -----");
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-        System.out.println("--- transactionManager END -----");
         return transactionManager;
     }
 
@@ -96,13 +86,10 @@ public class DataConfiguration {
 
 
     private Properties hibernateProperties() {
-        System.out.println("--- hibernateProperties -----");
         Properties properties = new Properties();
         properties.put(PROP_HIBERNATE_DIALECT, env.getRequiredProperty(PROP_HIBERNATE_DIALECT));
         properties.put(PROP_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROP_HIBERNATE_SHOW_SQL));
         properties.put(PROP_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROP_HIBERNATE_HBM2DDL_AUTO));
-        // properties.put(PROP_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROP_HIBERNATE_HBM2DDL_AUTO));
-        System.out.println("--- hibernateProperties END -----");
         return properties;
     }
 

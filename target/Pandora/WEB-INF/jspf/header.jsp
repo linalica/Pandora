@@ -32,18 +32,18 @@
                 </li>
             </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Theme<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li class="text-center"><a
-                                    href="${contextPath}/theme?theme=light">light</a></li>
-                            <li class="text-center"><a
-                                    href="${contextPath}/theme?theme=dark">dark</a></li>
-                        </ul>
-                    </li>
-                </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Theme<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="text-center"><a
+                                href="${contextPath}/theme?theme=light">light</a></li>
+                        <li class="text-center"><a
+                                href="${contextPath}/theme?theme=dark">dark</a></li>
+                    </ul>
+                </li>
+            </ul>
 
             <%--sign in & sign up--%>
             <roles:guest principal="${pageContext.request.userPrincipal}">
@@ -53,9 +53,9 @@
                         <fmt:message key="label.sign.up"/>
                     </button>
 
-                    <%--<c:if test="${error != null}">
+                        <%--<c:if test="${error != null}">
 
-                    </c:if>--%>
+                        </c:if>--%>
                     <button type="button" class="btn btn-default" id="signInButton"
                             data-toggle="modal" data-target="#signInModal">
                         <fmt:message key="label.sign.in"/>
@@ -70,12 +70,36 @@
                 </form>
             </roles:notguest>
 
+            <roles:notguest principal="${pageContext.request.userPrincipal}">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><fmt:message key="label.settings"/><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="text-center"><a href="${contextPath}/main"><fmt:message
+                                    key="label.edit.profile"/></a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li class="text-center"><a href="${contextPath}/logout"><fmt:message
+                                    key="label.sign.out"/></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="${contextPath}/main">${pageContext.request.userPrincipal.getName()}</a></li>
+                </ul>
+            </roles:notguest>
+
+
             <%--avatar--%>
             <roles:notguest principal="${pageContext.request.userPrincipal}">
                 <ul class="nav navbar-nav navbar-right">
                     <a class="head" data-toggle="modal" data-target="#changeAvatarModal">
                         <img class="img-circle" height="45" width="45"
-                             src="${context}/loadAvatar"
+                             src="${contextPath}/loadAvatar"
                              alt="Avatar">
                     </a>
                 </ul>
@@ -106,16 +130,15 @@
                             <input name="password"
                                    type="password"
                                    class="form-control"
-                                   <%--pattern="^.*(?=^.{6,}$)(?=.*[a-zа-яё]+)(?=.*[0-9]+).*$"--%>
+                                <%--pattern="^.*(?=^.{6,}$)(?=.*[a-zа-яё]+)(?=.*[0-9]+).*$"--%>
                                    placeholder="<fmt:message key="label.password"/>"/>
                             <span>${error}</span>
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <button class="btn btn-lg btn-primary btn-block" type="submit">
                                 <fmt:message key="label.submit"/>
                             </button>
                         </div>
                     </form>
-                    <%--(?=.*[A-ZА-ЯЁ]+)--%>
+                        <%--(?=.*[A-ZА-ЯЁ]+)--%>
                 </div>
             </div>
         </div>
@@ -135,11 +158,11 @@
                 <div class="modal-body">
                     <h4 class="text-center">
                         <img class="img-circle" height="300" width="300"
-                             src="${context}/loadAvatar"
+                             src="${contextPath}/loadAvatar"
                              alt="Avatar">
                     </h4>
                     <h4 class="text-center">
-                        <form id="changeAvatarForm" action="${context}/changeAvatar" method="post"
+                        <form id="changeAvatarForm" action="${contextPath}/changeAvatar" method="post"
                               enctype="multipart/form-data">
                             <div class="form-group-lg">
                                 <input id="changeAvatar" type="file" name="avatar" class="form-control">
@@ -148,7 +171,7 @@
                     </h4>
                 </div>
                 <div class="modal-footer">
-                    <form id="resetAvatarForm" action="${context}/controller" method="post">
+                    <form id="resetAvatarForm" action="${contextPath}/resetAvatar" method="post">
                         <button type="submit" class="btn btn-default pull-left" name="command"
                                 value="resetAvatar">
                             <fmt:message key="label.reset"/></button>

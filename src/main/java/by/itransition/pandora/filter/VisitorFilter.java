@@ -11,11 +11,8 @@ import java.io.IOException;
 @WebFilter(filterName = "VisitorFilter",  urlPatterns = {"/views/*"})
 public class VisitorFilter implements Filter {
 
-
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-      //TODO: remove
-        //  System.out.println("------- VisitorFilter -------- ");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         initUserState(request);
         filterChain.doFilter(servletRequest, servletResponse);
@@ -29,12 +26,6 @@ public class VisitorFilter implements Filter {
             visitor.setTheme(ControllerConstants.DEFAULT_THEME);
             req.getSession().setAttribute(ControllerConstants.VISITOR_KEY, visitor);
         }
-/* TODO: remove
-        System.out.println("visitor: " + visitor);
-        Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        System.out.println("userDetails: " + userDetails);
-*/
-
     }
 
     @Override

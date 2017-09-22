@@ -1,7 +1,6 @@
 package by.itransition.pandora.controller;
 
 import by.itransition.pandora.model.User;
-import by.itransition.pandora.security.SecurityService;
 import by.itransition.pandora.service.UserService;
 import by.itransition.pandora.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserController {
 
-
-    @Autowired
-    private SecurityService securityService;
-
     @Autowired
     private UserValidator userValidator;
 
     @Autowired
     private UserService userService;
-
-
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -40,7 +33,6 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        System.err.println("--- /registration ");
         userValidator.validate(userForm, bindingResult);
         if (bindingResult.hasErrors()) {
             return "registration";
@@ -51,7 +43,6 @@ public class UserController {
 
     @RequestMapping(value = "/registrationConfirm", method = RequestMethod.GET)
     public String regitrationConfirm(String token) {
-        System.err.println("--- /registrationConfirm " + token);
         userService.confirmRegistration(token);
         return "redirect:/main";
     }

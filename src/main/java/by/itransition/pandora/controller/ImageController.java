@@ -34,7 +34,6 @@ public class ImageController {
     @RequestMapping(value = "/loadAvatar", method = RequestMethod.GET)
     public void loadAvatar(HttpServletResponse response, Principal principal) {
         try {
-            System.err.println("--- loadAvatar"); //TODO: remove
             response.getOutputStream().write(imageService.getAvatar(principal));
         } catch (IOException e) {
             LOGGER.log(Level.ERROR, "Can`t load avatar from " + principal + " .", e);
@@ -43,17 +42,7 @@ public class ImageController {
 
     @RequestMapping(value = "/changeAvatar", method = RequestMethod.POST)
     public String changeAvatar(@RequestParam("avatar") MultipartFile avatar, Principal principal) {
-        System.err.println("--- changeAvatar"); //TODO: remove
         imageService.changeAvatar(avatar, principal);
         return "redirect:/main";
     }
-
-
-    /*@RequestMapping(value = "/", method = RequestMethod.GET)
-    public String listUploadedFiles(Model model) throws IOException {
-
-
-        return "uploadForm";
-    }*/
-
 }
