@@ -1,94 +1,59 @@
 package by.itransition.pandora.controller;
 
 import by.itransition.pandora.model.User;
-import by.itransition.pandora.repository.UserRepository;
+import by.itransition.pandora.security.SecurityService;
 import by.itransition.pandora.service.UserService;
+import by.itransition.pandora.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Gulevich Ulyana
+ * @author Ematinov Kirill
  * @version 1.0
  */
-
-
-@RestController
+@Controller
 public class UserController {
 
-    @Autowired
-    UserRepository userRepository;
 
     @Autowired
-    UserService userService;
+    private SecurityService securityService;
 
-    @RequestMapping(value = "/lol",  method = RequestMethod.POST)
-    String lol(String s) {
-        User user = userRepository.findByUsername("proselyte5");
-        System.out.println("POST lol: " + user);
-        /*List<UserListDto> users = userService.findAll();
-        Iterator<UserListDto> it = users.iterator();
-        while(it.hasNext()){
-            System.out.println("- | " + it.next());
-        }*/
+    @Autowired
+    private UserValidator userValidator;
 
-        return "Hello, my darling!";
+    @Autowired
+    private UserService userService;
+
+
+
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String registration(Model model) {
+        model.addAttribute("userForm", new User());
+        return "registration";
     }
 
-    @RequestMapping(value = "/lol",  method = RequestMethod.GET)
-    String lol() {
-        User user = userRepository.findByUsername("proselyte5");
-        System.out.println("GET lol: " + user);
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("------ auth: " + auth);
-        SecurityContext context = SecurityContextHolder.getContext();
-        System.out.println("------ context: " + context);
-
-        /*List<UserListDto> users = userService.findAll();
-        Iterator<UserListDto> it = users.iterator();
-        while(it.hasNext()){
-            System.out.println("- | " + it.next());
-        }*/
-
-        return "Hello, my darling!";
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+        System.err.println("--- /registration ");
+        userValidator.validate(userForm, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+        userService.save(userForm);
+        return "redirect:/main";
     }
 
-    @RequestMapping("/hello/{name}")
-    String hello(@PathVariable String name) {
-        return "Hello, " + name + "!";
+    @RequestMapping(value = "/registrationConfirm", method = RequestMethod.GET)
+    public String regitrationConfirm(String token) {
+        System.err.println("--- /registrationConfirm " + token);
+        userService.confirmRegistration(token);
+        return "redirect:/main";
     }
 
 }
-
-/*
-@PostMapping(value = "/login")
-    @ResponseStatus(value = HttpStatus.OK)
-    public LoginResponseDto login(@RequestBody final LoginRequestDto loginRequestDto) {
-
-        return authenticationService.login(loginRequestDto);
-    }
-
-    @GetMapping(value = "/me")
-    @ResponseStatus(value = HttpStatus.OK)
-    public AuthUserDto me() {
-        return authenticationService.getMe();
-    }
-
-
-    @Bean
-    public CommandLineRunner bootstrap() {
-        return (args) -> {
-            System.out.println("--------------It is CommandLineRunner!");
-        };
-    }*/
-
-
-
-
-

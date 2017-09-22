@@ -1,10 +1,12 @@
 package by.itransition.pandora.model;
 
 /**
- * @author ikatlinsky
- * @since 5/12/17
+ * Simple Enum that represents role of {@link User}.
+ *
+ * @author Gulevich Ulyana
+ * @author Ematinov Kirill
+ * @version 1.0
  */
 public enum UserRole {
-    ROLE_ADMIN,
-    ROLE_USER
+    ROLE_USER, ROLE_VERIFIED, ROLE_ADMIN;
 }
