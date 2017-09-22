@@ -1,134 +1,94 @@
 package by.itransition.pandora.controller;
 
-import by.itransition.pandora.model.Objective;
-import by.itransition.pandora.model.Project;
 import by.itransition.pandora.model.User;
-import by.itransition.pandora.model.Visitor;
-import by.itransition.pandora.repository.CommentRepository;
-import by.itransition.pandora.repository.MarkRepository;
-import by.itransition.pandora.repository.ObjectiveRepository;
-import by.itransition.pandora.security.SecurityService;
-import by.itransition.pandora.service.ProjectService;
+import by.itransition.pandora.repository.UserRepository;
 import by.itransition.pandora.service.UserService;
-import by.itransition.pandora.util.URIAnalyzer;
-import by.itransition.pandora.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Gulevich Ulyana
- * @author Ematinov Kirill
  * @version 1.0
  */
-@Controller
+
+
+@RestController
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    UserRepository userRepository;
 
     @Autowired
-    private ObjectiveRepository objectiveRepository;
+    UserService userService;
 
-    @Autowired
-    private CommentRepository commentRepository;
+    @RequestMapping(value = "/lol",  method = RequestMethod.POST)
+    String lol(String s) {
+        User user = userRepository.findByUsername("proselyte5");
+        System.out.println("POST lol: " + user);
+        /*List<UserListDto> users = userService.findAll();
+        Iterator<UserListDto> it = users.iterator();
+        while(it.hasNext()){
+            System.out.println("- | " + it.next());
+        }*/
 
-    @Autowired
-    private ProjectService projectService;
-
-    @Autowired
-    private SecurityService securityService;
-
-    @Autowired
-    private UserValidator userValidator;
-
-    @Autowired
-    private MarkRepository markRepository;
-
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model) {
-        model.addAttribute("userForm", new User());
-        return "registration";
+        return "Hello, my darling!";
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        userValidator.validate(userForm, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
+    @RequestMapping(value = "/lol",  method = RequestMethod.GET)
+    String lol() {
+        User user = userRepository.findByUsername("proselyte5");
+        System.out.println("GET lol: " + user);
 
-        //email
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("------ auth: " + auth);
+        SecurityContext context = SecurityContextHolder.getContext();
+        System.out.println("------ context: " + context);
 
-        userService.save(userForm);
-        securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
-        return "redirect:/welcome";
+        /*List<UserListDto> users = userService.findAll();
+        Iterator<UserListDto> it = users.iterator();
+        while(it.hasNext()){
+            System.out.println("- | " + it.next());
+        }*/
+
+        return "Hello, my darling!";
     }
 
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout, HttpServletRequest request) {
-        /*String username = securityService.findLoggedInUsername();
-        System.err.println("-- username: " + username);
-        userService.updateLastLoginByUsername(securityService.findLoggedInUsername());
-        System.err.println("-- lastLogin: " + userService.findByUsername(securityService.findLoggedInUsername()).getLastLoginTime());
-        */
-
-        if (error != null) {
-            model.addAttribute("error", "Username or password is incorrect.");
-        }
-        if (logout != null) {
-            model.addAttribute("message", "Logged out successfully.");
-        }
-        return "login";
-    }
-
-    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
-        return "welcome";
-    }
-
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String admin(Model model) {
-        return "admin";
-    }
-
-    @RequestMapping(value = "/locale", method = RequestMethod.GET)
-    public String locale(Principal principal, HttpServletRequest request, String locale) {
-
-        Project project = projectService.findById(new Long(1));
-        System.err.println("--- " + project);
-
-        Objective o = new Objective();
-        o.setPrice(200.0);
-        o.setName("new obj");
-        o.setDescription("try to add obj");
-        projectService.addObjective(o, new Long(1));
-
-        Project project2 = projectService.findFullById(new Long(1));
-        System.err.println("--- " + project2);
-        System.err.println("--- " + project2.getObjectives());
-
-        Project project3 = projectService.findFullById(new Long(2));
-        System.err.println("--- " + project3);
-        System.err.println("--- " + project3.getObjectives());
-
-
-        if (principal != null) {
-            String username = ((UserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUsername();
-            userService.updateLocaleByUsername(username, locale);
-        }
-        ((Visitor) request.getSession().getAttribute(ControllerConstants.VISITOR_KEY)).setLocale(locale);
-        return "redirect:" + URIAnalyzer.getCurrentPage(request);
+    @RequestMapping("/hello/{name}")
+    String hello(@PathVariable String name) {
+        return "Hello, " + name + "!";
     }
 
 }
+
+/*
+@PostMapping(value = "/login")
+    @ResponseStatus(value = HttpStatus.OK)
+    public LoginResponseDto login(@RequestBody final LoginRequestDto loginRequestDto) {
+
+        return authenticationService.login(loginRequestDto);
+    }
+
+    @GetMapping(value = "/me")
+    @ResponseStatus(value = HttpStatus.OK)
+    public AuthUserDto me() {
+        return authenticationService.getMe();
+    }
+
+
+    @Bean
+    public CommandLineRunner bootstrap() {
+        return (args) -> {
+            System.out.println("--------------It is CommandLineRunner!");
+        };
+    }*/
+
+
+
+
+

@@ -14,9 +14,7 @@ import java.util.Arrays;
 
 @Entity
 @Table(name = "users")
-public class User implements IDatabaseEntity {
-
-    private static final long serialVersionUID = 1L;
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -63,8 +61,64 @@ public class User implements IDatabaseEntity {
     @Column(name = "user_locale")
     private String locale;
 
-    @Column(name = "user_theme")
-    private String theme;
+    public User() {
+    }
+
+    public User(String username, String password, UserRole role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        if (getId() != null ? !getId().equals(user.getId()) : user.getId() != null) return false;
+        if (getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null)
+            return false;
+        if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
+            return false;
+        if (getConfirmPassword() != null ? !getConfirmPassword().equals(user.getConfirmPassword()) : user.getConfirmPassword() != null)
+            return false;
+        if (getRole() != user.getRole()) return false;
+        if (getEnabled() != null ? !getEnabled().equals(user.getEnabled()) : user.getEnabled() != null) return false;
+        if (!Arrays.equals(getAvatar(), user.getAvatar())) return false;
+        if (getFirstName() != null ? !getFirstName().equals(user.getFirstName()) : user.getFirstName() != null)
+            return false;
+        if (getLastName() != null ? !getLastName().equals(user.getLastName()) : user.getLastName() != null)
+            return false;
+        if (!Arrays.equals(getPassport(), user.getPassport())) return false;
+        if (getBirthday() != null ? !getBirthday().equals(user.getBirthday()) : user.getBirthday() != null)
+            return false;
+        if (getCreatingTime() != null ? !getCreatingTime().equals(user.getCreatingTime()) : user.getCreatingTime() != null)
+            return false;
+        if (getLastLoginTime() != null ? !getLastLoginTime().equals(user.getLastLoginTime()) : user.getLastLoginTime() != null)
+            return false;
+        return getLocale() != null ? getLocale().equals(user.getLocale()) : user.getLocale() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getUsername() != null ? getUsername().hashCode() : 0);
+        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
+        result = 31 * result + (getConfirmPassword() != null ? getConfirmPassword().hashCode() : 0);
+        result = 31 * result + (getRole() != null ? getRole().hashCode() : 0);
+        result = 31 * result + (getEnabled() != null ? getEnabled().hashCode() : 0);
+        result = 31 * result + Arrays.hashCode(getAvatar());
+        result = 31 * result + (getFirstName() != null ? getFirstName().hashCode() : 0);
+        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
+        result = 31 * result + Arrays.hashCode(getPassport());
+        result = 31 * result + (getBirthday() != null ? getBirthday().hashCode() : 0);
+        result = 31 * result + (getCreatingTime() != null ? getCreatingTime().hashCode() : 0);
+        result = 31 * result + (getLastLoginTime() != null ? getLastLoginTime().hashCode() : 0);
+        result = 31 * result + (getLocale() != null ? getLocale().hashCode() : 0);
+        return result;
+    }
 
     @Override
     public String toString() {
@@ -83,11 +137,11 @@ public class User implements IDatabaseEntity {
                 ", creatingTime=" + creatingTime +
                 ", lastLoginTime=" + lastLoginTime +
                 ", locale='" + locale + '\'' +
-                ", theme='" + theme + '\'' +
                 '}';
     }
 
     public Long getId() {
+
         return id;
     }
 
@@ -197,13 +251,5 @@ public class User implements IDatabaseEntity {
 
     public void setLocale(String locale) {
         this.locale = locale;
-    }
-
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
     }
 }
