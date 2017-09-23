@@ -29,6 +29,13 @@ public class ImageServiceImpl implements ImageService {
     private static final Logger LOGGER = LogManager.getLogger(ImageServiceImpl.class);
     private static final String AVATAR_PARAM = "avatar";
 
+
+    @Override
+    public void resetAvatar(Principal principal) {
+        userService.updateAvatarByUsername(principal.getName(), null);
+    }
+
+    @Override
     public byte[] getAvatar(Principal principal) {
         byte[] image = null;
         if (principal != null) {
@@ -41,21 +48,15 @@ public class ImageServiceImpl implements ImageService {
         return image;
     }
 
-
+    @Override
     public void changeAvatar(MultipartFile avatarPart, Principal principal) {
-
-        System.out.println("-- avatarPart: " + avatarPart);
-
         if (avatarPart == null) {
             LOGGER.log(Level.WARN, "Problems with ChangeAvatarCommand.");
             return;
         }
         byte[] empty = {};
         byte[] avatar = empty;
-
         int fileSize = (int) avatarPart.getSize();
-        System.out.println("-- fileSize: " + fileSize);
-
         if (fileSize != 0 && fileSize <= ControllerConstants.MAX_FILE_SIZE) {
             avatar = new byte[fileSize];
             try {

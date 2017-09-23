@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand total-brand-logo" href="${context}/main"><fmt:message
+            <a class="navbar-brand total-brand-logo" href="${contextPath}/main"><fmt:message
                     key="label.main.title"/></a>
         </div>
 
@@ -35,12 +35,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Theme<span class="caret"></span></a>
+                       aria-expanded="false"><fmt:message key="label.theme"/><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="text-center"><a
-                                href="${contextPath}/theme?theme=light">light</a></li>
+                                href="${contextPath}/theme?theme=light"><fmt:message key="label.theme.light"/></a></li>
                         <li class="text-center"><a
-                                href="${contextPath}/theme?theme=dark">dark</a></li>
+                                href="${contextPath}/theme?theme=dark"><fmt:message key="label.theme.dark"/></a></li>
                     </ul>
                 </li>
             </ul>
@@ -53,9 +53,6 @@
                         <fmt:message key="label.sign.up"/>
                     </button>
 
-                        <%--<c:if test="${error != null}">
-
-                        </c:if>--%>
                     <button type="button" class="btn btn-default" id="signInButton"
                             data-toggle="modal" data-target="#signInModal">
                         <fmt:message key="label.sign.in"/>
@@ -70,24 +67,23 @@
                 </form>
             </roles:notguest>
 
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><fmt:message key="label.settings"/><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="text-center"><a href="${contextPath}/project/newProject">newProject</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="text-center"><a href="${contextPath}/logout"><fmt:message
+                                key="label.sign.out"/></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul
+
             <roles:notguest principal="${pageContext.request.userPrincipal}">
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><fmt:message key="label.settings"/><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li class="text-center"><a href="${contextPath}/main"><fmt:message
-                                    key="label.edit.profile"/></a>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li class="text-center"><a href="${contextPath}/logout"><fmt:message
-                                    key="label.sign.out"/></a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="${contextPath}/main">${pageContext.request.userPrincipal.getName()}</a></li>
                 </ul>
@@ -99,7 +95,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <a class="head" data-toggle="modal" data-target="#changeAvatarModal">
                         <img class="img-circle" height="45" width="45"
-                             src="${contextPath}/loadAvatar"
+                             src="${contextPath}/user/loadAvatar"
                              alt="Avatar">
                     </a>
                 </ul>
@@ -158,11 +154,11 @@
                 <div class="modal-body">
                     <h4 class="text-center">
                         <img class="img-circle" height="300" width="300"
-                             src="${contextPath}/loadAvatar"
+                             src="${contextPath}/user/loadAvatar"
                              alt="Avatar">
                     </h4>
                     <h4 class="text-center">
-                        <form id="changeAvatarForm" action="${contextPath}/changeAvatar" method="post"
+                        <form id="changeAvatarForm" action="${contextPath}/user/changeAvatar" method="post"
                               enctype="multipart/form-data">
                             <div class="form-group-lg">
                                 <input id="changeAvatar" type="file" name="avatar" class="form-control">
@@ -171,11 +167,10 @@
                     </h4>
                 </div>
                 <div class="modal-footer">
-                    <form id="resetAvatarForm" action="${contextPath}/resetAvatar" method="post">
-                        <button type="submit" class="btn btn-default pull-left" name="command"
-                                value="resetAvatar">
+                    <form id="resetAvatarForm" action="${contextPath}/user/resetAvatar" method="post">
+                        <button type="submit" class="btn btn-default pull-left">
                             <fmt:message key="label.reset"/></button>
-                        <button type="submit" form="changeAvatarForm" name="command" value="changeAvatar"
+                        <button type="submit" form="changeAvatarForm"
                                 class="btn btn-primary pull-right"><fmt:message
                                 key="label.submit"/></button>
                     </form>

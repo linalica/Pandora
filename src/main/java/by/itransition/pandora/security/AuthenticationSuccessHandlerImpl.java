@@ -23,17 +23,14 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
     UserService userService;
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request,
-                                        HttpServletResponse response,
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-        System.out.println("---- AuthenticationSuccessHandlerImpl"); //todo: remove
         if (authentication != null) {
             User user = userService.findByUsername(authentication.getName());
             Visitor visitor = (Visitor) request.getSession().getAttribute(ControllerConstants.VISITOR_KEY);
             visitor.setTheme(user.getTheme());
             visitor.setLocale(user.getLocale());
         }
-        //response.getOutputStream().write("success".getBytes());
         response.sendRedirect("main");
     }
 }

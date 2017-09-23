@@ -47,5 +47,9 @@ main {
 }
 
 .has-error {
-    color: red
+     color: red
+ }
+
+.pandora-text-label {
+    margig: 5px, 5px, 10px, 5px;
 }

@@ -25,9 +25,8 @@ public class MainController {
     @Autowired
     UserService userService;
 
-
     @RequestMapping(value = {"/main", "/"}, method = RequestMethod.GET)
-    public String main(Model model, String error, String logout, HttpServletRequest request) {
+    public String main(Model model, String error) {
         if (error != null) {
             model.addAttribute("error", "Username or password is incorrect.");
         }

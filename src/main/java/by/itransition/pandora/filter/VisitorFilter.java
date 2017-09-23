@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+
+
 @WebFilter(filterName = "VisitorFilter",  urlPatterns = {"/views/*"})
 public class VisitorFilter implements Filter {
 

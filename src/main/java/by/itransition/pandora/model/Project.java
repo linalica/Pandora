@@ -1,8 +1,10 @@
 package by.itransition.pandora.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,8 +27,14 @@ public class Project implements IDatabaseEntity {
     @Column(name = "project_picture")
     private byte[] picture;
 
-    @Column(name = "project_creating_time")
-    private Timestamp creatingTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "project_creating_date")
+    private Date creatingDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "project_finish_date")
+    private Date finishDate;
+
 
     @Column(name = "project_status")
     @Enumerated(EnumType.STRING)
@@ -53,7 +61,8 @@ public class Project implements IDatabaseEntity {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", picture=" + Arrays.toString(picture) +
-                ", creatingTime=" + creatingTime +
+                ", creatingDate=" + creatingDate +
+                ", finishDate=" + finishDate +
                 ", projectStatus=" + projectStatus +
                 ", minObjectiveAchieved=" + minObjectiveAchieved +
                 ", objectives=" + objectives +
@@ -74,7 +83,9 @@ public class Project implements IDatabaseEntity {
         if (getDescription() != null ? !getDescription().equals(project.getDescription()) : project.getDescription() != null)
             return false;
         if (!Arrays.equals(getPicture(), project.getPicture())) return false;
-        if (getCreatingTime() != null ? !getCreatingTime().equals(project.getCreatingTime()) : project.getCreatingTime() != null)
+        if (getCreatingDate() != null ? !getCreatingDate().equals(project.getCreatingDate()) : project.getCreatingDate() != null)
+            return false;
+        if (getFinishDate() != null ? !getFinishDate().equals(project.getFinishDate()) : project.getFinishDate() != null)
             return false;
         if (getProjectStatus() != project.getProjectStatus()) return false;
         if (getMinObjectiveAchieved() != null ? !getMinObjectiveAchieved().equals(project.getMinObjectiveAchieved()) : project.getMinObjectiveAchieved() != null)
@@ -92,7 +103,8 @@ public class Project implements IDatabaseEntity {
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
         result = 31 * result + Arrays.hashCode(getPicture());
-        result = 31 * result + (getCreatingTime() != null ? getCreatingTime().hashCode() : 0);
+        result = 31 * result + (getCreatingDate() != null ? getCreatingDate().hashCode() : 0);
+        result = 31 * result + (getFinishDate() != null ? getFinishDate().hashCode() : 0);
         result = 31 * result + (getProjectStatus() != null ? getProjectStatus().hashCode() : 0);
         result = 31 * result + (getMinObjectiveAchieved() != null ? getMinObjectiveAchieved().hashCode() : 0);
         result = 31 * result + (getObjectives() != null ? getObjectives().hashCode() : 0);
@@ -133,12 +145,20 @@ public class Project implements IDatabaseEntity {
         this.picture = picture;
     }
 
-    public Timestamp getCreatingTime() {
-        return creatingTime;
+    public Date getCreatingDate() {
+        return creatingDate;
     }
 
-    public void setCreatingTime(Timestamp creatingTime) {
-        this.creatingTime = creatingTime;
+    public void setCreatingDate(Date creatingDate) {
+        this.creatingDate = creatingDate;
+    }
+
+    public Date getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(Date finishDate) {
+        this.finishDate = finishDate;
     }
 
     public ProjectStatus getProjectStatus() {

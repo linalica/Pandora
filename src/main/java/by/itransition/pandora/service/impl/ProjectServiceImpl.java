@@ -44,7 +44,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void save(Project project) {
-        project.setCreatingTime(Timestamp.valueOf(LocalDateTime.now()));
+        project.setCreatingDate(Timestamp.valueOf(LocalDateTime.now()));
         projectRepository.save(project);
     }
 

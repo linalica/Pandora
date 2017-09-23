@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
         userValidator.validate(userForm, bindingResult);
         if (bindingResult.hasErrors()) {
             return "registration";
@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registrationConfirm", method = RequestMethod.GET)
-    public String regitrationConfirm(String token) {
+    public String registrationConfirm(String token) {
         userService.confirmRegistration(token);
         return "redirect:/main";
     }

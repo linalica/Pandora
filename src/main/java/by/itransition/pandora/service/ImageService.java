@@ -14,5 +14,6 @@ public interface ImageService {
 
     void changeAvatar(MultipartFile avatarPart, Principal principal);
 
+    void resetAvatar(Principal principal);
 
 }
