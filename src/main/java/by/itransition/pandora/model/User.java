@@ -61,6 +61,7 @@ public class User {
     @Column(name = "user_locale")
     private String locale;
 
+<<<<<<< HEAD
     public User() {
     }
 
@@ -68,6 +69,26 @@ public class User {
         this.username = username;
         this.password = password;
         this.role = role;
+=======
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                ", role=" + role +
+                ", enabled=" + enabled +
+                ", avatar=" + Arrays.toString(avatar) +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", passport=" + Arrays.toString(passport) +
+                ", birthday=" + birthday +
+                ", creatingTime=" + creatingTime +
+                ", lastLoginTime=" + lastLoginTime +
+                ", locale='" + locale + '\'' +
+                '}';
+>>>>>>> actual-database
     }
 
     @Override
@@ -119,6 +140,7 @@ public class User {
         result = 31 * result + (getLocale() != null ? getLocale().hashCode() : 0);
         return result;
     }
+<<<<<<< HEAD
 
     @Override
     public String toString() {
@@ -139,6 +161,8 @@ public class User {
                 ", locale='" + locale + '\'' +
                 '}';
     }
+=======
+>>>>>>> actual-database
 
     public Long getId() {
 
