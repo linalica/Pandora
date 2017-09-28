@@ -6,20 +6,6 @@
     <artifactId>Pandora</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-    <name>Pandora Maven Webapp</name>
-    <url>http://maven.apache.org</url>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.3.RELEASE</version>
-    </parent>
-=======
-=======
->>>>>>> new-start
     <name>Pandora Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
@@ -28,10 +14,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-<<<<<<< HEAD
->>>>>>> actual-database
-=======
->>>>>>> new-start
 
     <dependencies>
 
@@ -42,33 +24,6 @@
             <scope>test</scope>
         </dependency>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.16</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>4.3.11.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.11.Final</version>
-        </dependency>
-=======
-=======
->>>>>>> new-start
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
@@ -92,52 +47,11 @@
             <artifactId>spring-security-config</artifactId>
             <version>4.0.2.RELEASE</version>
         </dependency>
-<<<<<<< HEAD
-
->>>>>>> actual-database
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>5.2.1.Final</version>
-        </dependency>
-
-<<<<<<< HEAD
-
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-rest-core</artifactId>
-            <version>2.0.0.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>4.2.2.RELEASE</version>
-        </dependency>
-
-
-        <!-- dataSource-->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>1.11.7.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-commons</artifactId>
-            <version>1.13.1.RELEASE</version>
-        </dependency>
-
-
-=======
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-=======
         <!--&#45;&#45;&#45;&#45;-->
 
 
         <dependency>
             <groupId>org.springframework.data</groupId>
->>>>>>> new-start
             <artifactId>spring-data-jpa</artifactId>
             <version>1.8.2.RELEASE</version>
         </dependency>
@@ -150,13 +64,6 @@
 
         <dependency>
             <groupId>org.hibernate</groupId>
-<<<<<<< HEAD
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.11.Final</version>
-        </dependency>
-
->>>>>>> actual-database
-=======
             <artifactId>hibernate-validator</artifactId>
             <version>5.2.1.Final</version>
         </dependency>
@@ -175,7 +82,6 @@
             <artifactId>tomcat-dbcp</artifactId>
             <version>7.0.55</version>
         </dependency>
->>>>>>> new-start
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -188,95 +94,6 @@
             <version>1.4</version>
         </dependency>
 
-<<<<<<< HEAD
-        <dependency>
-<<<<<<< HEAD
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.196</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>4.0.2.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>4.0.2.RELEASE</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-jwt -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-jwt</artifactId>
-            <version>1.0.8.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>4.2.0.RELEASE</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>r05</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.5</version>
-        </dependency>
-
-    </dependencies>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
-
-    <build>
-
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-
-=======
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
-
-        <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>1.1.3</version>
-    </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.0</version>
-        </dependency>
-
-    </dependencies>
-    <build>
->>>>>>> actual-database
-=======
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -356,10 +173,8 @@
             <version>1.4.7</version>
         </dependency>
 
-
     </dependencies>
     <build>
->>>>>>> new-start
         <finalName>Pandora</finalName>
     </build>
 </project>

@@ -1,20 +1,45 @@
 body {
     padding-top: 70px;
     padding-bottom: 70px;
-<<<<<<< HEAD
-    background-color: #eee;
-=======
-}
-
-main {
-    min-height: 90vh;
->>>>>>> new-start
 }
 
 main {
     min-height: 90vh;
 }
 
+.mainTable {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.table-rounded {
+    border-radius: 4px;
+}
+
+.pandora-brand-logo {
+    font-family: 'Noto Serif', serif;
+    /*font-family: 'PT Serif', serif;*/
+    /*font-family: 'Patua One', cursive;*/
+    /*font-family: 'Baloo Bhaina', cursive;*/
+    font-size: 30px;
+    font-weight:bold
+}
+
+.pandora-font {
+    font-family: 'Noto Serif', serif;
+    font-weight:bold
+    /*font-family: 'PT Serif', serif;*/
+    /*font-family: 'Patua One', cursive;*/
+    /*font-family: 'Baloo Bhaina', cursive;*/
+}
+
+.table-hover tbody tr:hover td, .table-hover  tbody tr:hover th {
+    background-color: #bce8f1;
+}
+
+.table.no-border tr td, .table.no-border tr th {
+    border-width: 0;
+}
 .form-signin {
     max-width: 330px;
     padding: 15px;
@@ -55,14 +80,9 @@ main {
 }
 
 .has-error {
-<<<<<<< HEAD
     color: red
 }
-=======
-     color: red
- }
 
 .pandora-text-label {
     margig: 5px, 5px, 10px, 5px;
 }
->>>>>>> new-start

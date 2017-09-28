@@ -1,4 +1,4 @@
-<header class="navbar navbar-default navbar-fixed-top">
+<header class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -9,12 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-<<<<<<< HEAD
-            <a class="navbar-brand total-brand-logo" href="${context}/index.jsp"><fmt:message
-=======
-            <a class="navbar-brand total-brand-logo" href="${contextPath}/main"><fmt:message
->>>>>>> new-start
-                    key="label.main.title"/></a>
+            <a class="navbar-brand pandora-brand-logo" href="${contextPath}/main">Pandora</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,23 +31,7 @@
                 </li>
             </ul>
 
-<<<<<<< HEAD
-            <%--sign in & sign up--%>
-            <form class="navbar-form navbar-right">
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#signUpModal">
-                    <fmt:message key="label.sign.up"/>
-                </button>
-                <button type="buttfon" class="btn btn-default" data-toggle="modal" data-target="#signInModal">
-                    <fmt:message key="label.sign.in"/>
-                </button>
-            </form>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="text-center"><a href="${contextPath}/locale">Locale</a></li>
-                </ul>
-
-
-=======
+            <%--theme--%>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -65,6 +44,14 @@
                     </ul>
                 </li>
             </ul>
+
+            <%--sign out--%>
+            <roles:notguest principal="${pageContext.request.userPrincipal}">
+                <form class="navbar-form navbar-right" id="logoutForm" method="POST" action="${contextPath}/logout">
+                    <button type="submit" class="btn btn-default"><fmt:message key="label.sign.out"/></button>
+                </form>
+            </roles:notguest>
+
 
             <%--sign in & sign up--%>
             <roles:guest principal="${pageContext.request.userPrincipal}">
@@ -81,32 +68,51 @@
                 </form>
             </roles:guest>
 
-            <%--sign out--%>
-            <roles:notguest principal="${pageContext.request.userPrincipal}">
-                <form class="navbar-form navbar-right" id="logoutForm" method="POST" action="${contextPath}/logout">
-                    <button type="submit" class="btn btn-default"><fmt:message key="label.sign.out"/></button>
-                </form>
-            </roles:notguest>
-
-
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><fmt:message key="label.settings"/><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="text-center"><a href="${contextPath}/project/newProject">newProject</a>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li class="text-center"><a href="${contextPath}/logout"><fmt:message
-                                key="label.sign.out"/></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul
-
+            <%--options--%>
             <roles:notguest principal="${pageContext.request.userPrincipal}">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="${contextPath}/main">${pageContext.request.userPrincipal.getName()}</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><fmt:message key="label.options"/><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <roles:user principal="${pageContext.request.userPrincipal}">
+                                <li class="text-center">
+                                    <a href="${contextPath}/verifyAccount"><fmt:message key="label.verify.account"/></a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                            </roles:user>
+                            <li class="text-center">
+                                <a href="${contextPath}/logout"><fmt:message key="label.sign.out"/></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </roles:notguest>
+
+            <%--project--%>
+            <roles:verified principal="${pageContext.request.userPrincipal}">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><fmt:message key="label.projects"/><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="text-center">
+                                <a href="${contextPath}/newProject"><fmt:message key="label.project.new"/></a>
+                            </li>
+                            <li class="text-center">
+                                <a href="${contextPath}/myProjects"><fmt:message key="label.projects.mine"/></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </roles:verified>
+
+            <%--username--%>
+            <roles:notguest principal="${pageContext.request.userPrincipal}">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="text-center">
+                        <a href="${contextPath}/main">${pageContext.request.userPrincipal.getName()}</a>
+                    </li>
                 </ul>
             </roles:notguest>
 
@@ -121,15 +127,20 @@
                     </a>
                 </ul>
             </roles:notguest>
->>>>>>> new-start
+
+            <%--admin page--%>
+            <roles:admin principal="${pageContext.request.userPrincipal}">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="text-center">
+                        <a href="${contextPath}/admin"><fmt:message key="label.admin.page"/></a>
+                    </li>
+                </ul>
+            </roles:admin>
 
 
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </header>
-<<<<<<< HEAD
-
-=======
 <roles:guest principal="${pageContext.request.userPrincipal}">
     <div class="modal fade" id="signInModal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
@@ -145,7 +156,7 @@
                         <div class="form-group ${error != null ? 'has-error' : ''}">
                                 <%--<span>${message}</span>--%>
                             <input name="username"
-                                   type="text"
+                                   type="email"
                                    class="form-control"
                                    placeholder="<fmt:message key="label.email.example"/>"/>
                             <input name="password"
@@ -155,7 +166,7 @@
                                    placeholder="<fmt:message key="label.password"/>"/>
                             <span>${error}</span>
                             <button class="btn btn-lg btn-primary btn-block" type="submit">
-                                <fmt:message key="label.submit"/>
+                                <fmt:message key="label.sign.in"/>
                             </button>
                         </div>
                     </form>
@@ -207,7 +218,6 @@
 
 <%---------------%>
 <%--
->>>>>>> new-start
 <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -308,100 +318,4 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-</div>
-
-<div class="modal fade" id="signInModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title"><fmt:message key="label.sign.in"/></h4>
-            </div>
-            <div class="modal-body">
-                <form id="signInForm" class="form-horizontal" action="${context}/controller" method="post">
-                    <div class="form-group has-feedback">
-                        <label class="control-label col-xs-4"><fmt:message key="label.username"/></label>
-                        <div class="col-xs-6">
-                            <div class="input-group">
-                                <input type="text" class="form-control inputSignIn" required="required"
-                                       name="signInUsername"
-                                       pattern="^[A-Za-zА-Яа-яЁё]([A-Za-zА-Яа-яЁё]|[0-9]|[_])*$"
-                                       placeholder="<fmt:message key="label.username"/>">
-                            </div>
-                            <span class="glyphicon form-control-feedback"></span>
-                        </div>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <label class="control-label col-xs-4"><fmt:message key="label.password"/></label>
-                        <div class="col-xs-6">
-                            <div class="input-group">
-                                <input type="password" class="form-control inputSignIn" required="required"
-                                       name="signInPassword"
-                                       pattern="^.*(?=^.{6,}$)(?=.*[A-ZА-ЯЁ]+)(?=.*[a-zа-яё]+)(?=.*[0-9]+).*$"
-                                       placeholder="<fmt:message key="label.password"/>">
-                            </div>
-                            <span class="glyphicon form-control-feedback"></span>
-                        </div>
-                    </div>
-                    <input type="hidden" name="command" value="signIn">
-                </form>
-            </div>
-
-            <div class="modal-footer">
-                <div class="alert alert-danger hidden" id="error-alert-sign-in">
-                    <div><fmt:message key="message.sign.in.incorrect.username.or.password"/></div>
-                </div>
-                <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message
-                        key="label.close"/></button>
-                <button type="submit" id="saveSignIn" form="signInForm" class="btn btn-primary"><fmt:message
-                        key="label.sign.in"/></button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<%--
-<div class="modal fade" id="changeAvatarModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span
-                        aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title"><fmt:message key="label.avatar"/></h4>
-            </div>
-            <div class="modal-body">
-                <h4 class="text-center">
-                    <img class="img-circle" height="300" width="300"
-                         src="${context}/controller?command=loadImage&src=account"
-                         alt="Avatar">
-                </h4>
-                <h4 class="text-center">
-                    <form id="changeAvatarForm" action="${context}/controller" method="post"
-                          enctype="multipart/form-data">
-                        <div class="form-group-lg">
-                            <input id="changeAvatar" type="file" name="avatar" class="form-control">
-                        </div>
-                        <input type="hidden" name="command" value="changeAvatar">
-                    </form>
-                </h4>
-            </div>
-            <div class="modal-footer">
-                <form id="resetAvatarForm" action="${context}/controller" method="post">
-                    <button type="submit" class="btn btn-default pull-left" name="command"
-                            value="resetAvatar">
-                        <fmt:message key="label.reset"/></button>
-                    <button type="submit" form="changeAvatarForm" name="command" value="changeAvatar"
-                            class="btn btn-primary pull-right"><fmt:message
-                            key="label.submit"/></button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
---%>
-=======
 </div>--%>
->>>>>>> new-start

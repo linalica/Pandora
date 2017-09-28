@@ -9,10 +9,7 @@
 
     <http auto-config="true">
         <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <!--<intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>-->
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
-<<<<<<< HEAD
-=======
 
         <form-login login-page="/main"
                     default-target-url="/main"
@@ -22,10 +19,7 @@
                     password-parameter="password"/>
         <logout logout-success-url="/main?logout"/>
         <csrf disabled="true"/>
->>>>>>> new-start
     </http>
-<<<<<<< HEAD
-=======
 
 
     <authentication-manager alias="authenticationManager">
@@ -34,18 +28,13 @@
         </authentication-provider>
     </authentication-manager>
 
-    <beans:bean id="authSuccessHandler" class="by.itransition.pandora.security.AuthenticationSuccessHandlerImpl"/>
+    <beans:bean id="authSuccessHandler" class="by.pandora.security.AuthenticationSuccessHandlerImpl"/>
 
     <beans:bean id="userDetailsServiceImpl"
-<<<<<<< HEAD
-                class="by.itransition.pandora.security.UserDetailsServiceImpl"></beans:bean>
-=======
-                class="by.itransition.pandora.security.UserDetailsServiceImpl"/>
->>>>>>> new-start
+                class="by.pandora.security.UserDetailsServiceImpl"/>
 
     <beans:bean id="encoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
         <beans:constructor-arg name="strength" value="11"/>
     </beans:bean>
->>>>>>> actual-database
 </beans:beans>

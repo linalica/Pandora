@@ -10,7 +10,7 @@
     <uri>http://itransition.by/pandora</uri>
     <tag>
         <name>admin</name>
-        <tag-class>by.itransition.pandora.tag.AdminTag</tag-class>
+        <tag-class>by.pandora.tag.AdminTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
             <name>principal</name>
@@ -20,7 +20,7 @@
     </tag>
     <tag>
         <name>user</name>
-        <tag-class>by.itransition.pandora.tag.UserTag</tag-class>
+        <tag-class>by.pandora.tag.UserTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
             <name>principal</name>
@@ -30,7 +30,7 @@
     </tag>
     <tag>
         <name>guest</name>
-        <tag-class>by.itransition.pandora.tag.GuestTag</tag-class>
+        <tag-class>by.pandora.tag.GuestTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
             <name>principal</name>
@@ -40,7 +40,17 @@
     </tag>
     <tag>
         <name>notguest</name>
-        <tag-class>by.itransition.pandora.tag.NotGuestTag</tag-class>
+        <tag-class>by.pandora.tag.NotGuestTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>principal</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>verified</name>
+        <tag-class>by.pandora.tag.VerifiedTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
             <name>principal</name>

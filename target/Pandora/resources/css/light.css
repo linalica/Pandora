@@ -1,5 +1,17 @@
 body {
     padding-top: 70px;
     padding-bottom: 70px;
-    background-color: #eee;
+    background-color: #ABBAD3;
+}
+
+.colorfulTable {
+    background-color: snow;
+}
+
+.navbar-pandora {
+    background-color: rgb(248, 248, 248);
+    border-color: rgb(231, 231, 231);
+}
+.table-hover tbody tr:hover td, .table-hover  tbody tr:hover th {
+    background-color: #F9D9D9;
 }
