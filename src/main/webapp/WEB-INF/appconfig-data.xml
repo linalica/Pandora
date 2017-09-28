@@ -41,6 +41,8 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.query.factory_class">org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory</prop>
+                <!--<prop key="hibernate.enable_lazy_load_no_trans">true</prop>-->
             </props>
         </property>
     </bean>
@@ -49,10 +51,19 @@
     <bean id="transactionManager"
           class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
+<<<<<<< HEAD
 
+=======
+>>>>>>> new-start
     </bean>
 
     <tx:annotation-driven/>
 
     <jpa:repositories base-package="by.itransition.pandora.repository"/>
+<<<<<<< HEAD
 </beans>
+=======
+
+
+</beans>
+>>>>>>> new-start

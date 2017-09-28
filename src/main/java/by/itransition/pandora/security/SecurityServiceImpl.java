@@ -44,7 +44,10 @@ public class SecurityServiceImpl implements SecurityService {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
         authenticationManager.authenticate(authenticationToken);
+<<<<<<< HEAD:src/main/java/by/itransition/pandora/security/SecurityServiceImpl.java
         System.out.println("-- SecurityServiceImpl | autoLogin");
+=======
+>>>>>>> new-start:src/main/java/by/itransition/pandora/security/SecurityServiceImpl.java
         if (authenticationToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             logger.debug(String.format("Successfully %s auto logged in", username));

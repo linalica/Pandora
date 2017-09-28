@@ -8,12 +8,20 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> new-start
 @WebFilter(filterName = "VisitorFilter",  urlPatterns = {"/views/*"})
 public class VisitorFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+<<<<<<< HEAD
         System.out.println("------- VisitorFilter -------- ");
+=======
+>>>>>>> new-start
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         initUserState(request);
         filterChain.doFilter(servletRequest, servletResponse);
@@ -24,7 +32,11 @@ public class VisitorFilter implements Filter {
         if (visitor == null) {
             visitor = new Visitor();
             visitor.setLocale(ControllerConstants.DEFAULT_LOCALE);
+<<<<<<< HEAD
             //visitor.setTheme(ControllerConstants.DEFAULT_LOCALE);
+=======
+            visitor.setTheme(ControllerConstants.DEFAULT_THEME);
+>>>>>>> new-start
             req.getSession().setAttribute(ControllerConstants.VISITOR_KEY, visitor);
         }
     }

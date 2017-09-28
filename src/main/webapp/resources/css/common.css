@@ -1,7 +1,14 @@
 body {
     padding-top: 70px;
     padding-bottom: 70px;
+<<<<<<< HEAD
     background-color: #eee;
+=======
+}
+
+main {
+    min-height: 90vh;
+>>>>>>> new-start
 }
 
 main {
@@ -48,5 +55,14 @@ main {
 }
 
 .has-error {
+<<<<<<< HEAD
     color: red
 }
+=======
+     color: red
+ }
+
+.pandora-text-label {
+    margig: 5px, 5px, 10px, 5px;
+}
+>>>>>>> new-start

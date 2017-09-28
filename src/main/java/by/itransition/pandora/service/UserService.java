@@ -1,6 +1,7 @@
 package by.itransition.pandora.service;
 
 import by.itransition.pandora.model.User;
+<<<<<<< HEAD
 import by.itransition.pandora.repository.UserRepository;
 import by.itransition.pandora.service.dto.model.UserListDto;
 import by.itransition.pandora.service.transformer.UserListTransformer;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+=======
+import by.itransition.pandora.model.UserRole;
+>>>>>>> new-start
 
 <<<<<<< HEAD
 @Service
@@ -26,8 +30,14 @@ public class UserService {
     //@Autowired
     private UserListTransformer userListTransformer = new UserListTransformer();
 
+<<<<<<< HEAD
     @Autowired
     private UserRepository userRepository;
+=======
+    void update(User user);
+
+    void save(User user);
+>>>>>>> new-start
 
 <<<<<<< HEAD
     //@Transactional(readOnly = true)
@@ -43,8 +53,29 @@ public class UserService {
 =======
     User findByUsername(String username);
 
+<<<<<<< HEAD
     void updateLastLoginByUsername(String username);
 
     void updateLocaleByUsername(String username, String locale);
 >>>>>>> actual-database
+=======
+    String findLocaleByUsername(String username);
+
+    UserRole findRoleByUsername(String username);
+
+    String findUsernameById(Long id);
+
+    byte[] findAvatarByUsername(String username);
+
+    void updateLocaleByUsername(String username, String locale);
+
+    void updateThemeByUsername(String username, String theme);
+
+    void updateLastLoginByUsername(String username);
+
+    void updateAvatarByUsername(String username, byte[] avatar);
+
+    void confirmRegistration(String verificationToken);
+
+>>>>>>> new-start
 }

@@ -2,7 +2,10 @@ package by.itransition.pandora.controller;
 
 import by.itransition.pandora.model.User;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import by.itransition.pandora.repository.UserRepository;
+=======
+>>>>>>> new-start
 import by.itransition.pandora.service.UserService;
 =======
 import by.itransition.pandora.model.Visitor;
@@ -30,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
 
     @Autowired
+<<<<<<< HEAD
     UserRepository userRepository;
 
     @Autowired
@@ -44,10 +48,17 @@ public class UserController {
         while(it.hasNext()){
             System.out.println("- | " + it.next());
         }*/
+=======
+    private UserValidator userValidator;
+
+    @Autowired
+    private UserService userService;
+>>>>>>> new-start
 
         return "Hello, my darling!";
     }
 
+<<<<<<< HEAD
     @RequestMapping(value = "/lol",  method = RequestMethod.GET)
     String lol() {
         User user = userRepository.findByUsername("proselyte5");
@@ -127,6 +138,22 @@ public class UserController {
         }
         ((Visitor) request.getSession().getAttribute(ControllerConstants.VISITOR_KEY)).setLocale(locale);
         return "redirect:" + URIAnalyzer.getCurrentPage(request);
+=======
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+        userValidator.validate(userForm, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+        userService.save(userForm);
+        return "redirect:/main";
+    }
+
+    @RequestMapping(value = "/registrationConfirm", method = RequestMethod.GET)
+    public String registrationConfirm(String token) {
+        userService.confirmRegistration(token);
+        return "redirect:/main";
+>>>>>>> new-start
     }
 
 }

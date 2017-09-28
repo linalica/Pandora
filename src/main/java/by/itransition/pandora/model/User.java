@@ -14,7 +14,9 @@ import java.util.Arrays;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements IDatabaseEntity {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -61,6 +63,7 @@ public class User {
     @Column(name = "user_locale")
     private String locale;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     public User() {
     }
@@ -141,6 +144,10 @@ public class User {
         return result;
     }
 <<<<<<< HEAD
+=======
+    @Column(name = "user_theme")
+    private String theme;
+>>>>>>> new-start
 
     @Override
     public String toString() {
@@ -159,10 +166,16 @@ public class User {
                 ", creatingTime=" + creatingTime +
                 ", lastLoginTime=" + lastLoginTime +
                 ", locale='" + locale + '\'' +
+<<<<<<< HEAD
                 '}';
     }
 =======
 >>>>>>> actual-database
+=======
+                ", theme='" + theme + '\'' +
+                '}';
+    }
+>>>>>>> new-start
 
     public Long getId() {
 
@@ -271,9 +284,24 @@ public class User {
 
     public String getLocale() {
         return locale;
+<<<<<<< HEAD
     }
 
     public void setLocale(String locale) {
         this.locale = locale;
+=======
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+>>>>>>> new-start
     }
 }

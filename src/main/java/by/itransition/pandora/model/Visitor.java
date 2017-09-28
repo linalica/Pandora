@@ -37,7 +37,10 @@ public class Visitor implements Serializable {
     }
 
     public String getLocale() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> new-start
         return locale;
     }
 

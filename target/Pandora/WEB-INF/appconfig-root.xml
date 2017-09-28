@@ -15,9 +15,13 @@
     <context:component-scan base-package="by.itransition.pandora.*"/>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!--    <context:property-placeholder location="classpath:properties/database.properties"/>-->
 =======
     <context:property-placeholder location="classpath:properties/database.properties"/>
 >>>>>>> actual-database
+=======
+    <context:property-placeholder location="classpath:properties/database.properties"/>
+>>>>>>> new-start
 
 </beans>

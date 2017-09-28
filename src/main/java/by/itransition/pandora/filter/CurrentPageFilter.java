@@ -10,17 +10,28 @@ public class CurrentPageFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+<<<<<<< HEAD
+=======
+        //System.out.println("---- CurrentPageFilter");
+>>>>>>> new-start
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+<<<<<<< HEAD
 
+=======
+>>>>>>> new-start
     }
 
     @Override
     public void destroy() {
+<<<<<<< HEAD
 
     }
 
+=======
+    }
+>>>>>>> new-start
 }

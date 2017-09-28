@@ -33,6 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.findByUsername(username);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().name()));
+<<<<<<< HEAD:src/main/java/by/itransition/pandora/security/UserDetailsServiceImpl.java
 
         //TODO: remove this
         CrmUserDetails u = new CrmUserDetails(user);
@@ -42,5 +43,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         //return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
         return u;
+=======
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(),
+                user.getPassword(),
+                user.getEnabled(),
+                true,
+                true,
+                true,
+                grantedAuthorities);
+>>>>>>> new-start:src/main/java/by/itransition/pandora/security/UserDetailsServiceImpl.java
     }
 }

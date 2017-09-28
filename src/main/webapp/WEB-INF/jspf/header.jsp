@@ -9,7 +9,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+<<<<<<< HEAD
             <a class="navbar-brand total-brand-logo" href="${context}/index.jsp"><fmt:message
+=======
+            <a class="navbar-brand total-brand-logo" href="${contextPath}/main"><fmt:message
+>>>>>>> new-start
                     key="label.main.title"/></a>
         </div>
 
@@ -32,6 +36,7 @@
                 </li>
             </ul>
 
+<<<<<<< HEAD
             <%--sign in & sign up--%>
             <form class="navbar-form navbar-right">
                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#signUpModal">
@@ -47,12 +52,162 @@
                 </ul>
 
 
+=======
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><fmt:message key="label.theme"/><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="text-center"><a
+                                href="${contextPath}/theme?theme=light"><fmt:message key="label.theme.light"/></a></li>
+                        <li class="text-center"><a
+                                href="${contextPath}/theme?theme=dark"><fmt:message key="label.theme.dark"/></a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <%--sign in & sign up--%>
+            <roles:guest principal="${pageContext.request.userPrincipal}">
+                <form class="navbar-form navbar-right">
+                    <button type="button" class="btn btn-default"
+                            onclick="location.href = '${contextPath}/registration'">
+                        <fmt:message key="label.sign.up"/>
+                    </button>
+
+                    <button type="button" class="btn btn-default" id="signInButton"
+                            data-toggle="modal" data-target="#signInModal">
+                        <fmt:message key="label.sign.in"/>
+                    </button>
+                </form>
+            </roles:guest>
+
+            <%--sign out--%>
+            <roles:notguest principal="${pageContext.request.userPrincipal}">
+                <form class="navbar-form navbar-right" id="logoutForm" method="POST" action="${contextPath}/logout">
+                    <button type="submit" class="btn btn-default"><fmt:message key="label.sign.out"/></button>
+                </form>
+            </roles:notguest>
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><fmt:message key="label.settings"/><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="text-center"><a href="${contextPath}/project/newProject">newProject</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="text-center"><a href="${contextPath}/logout"><fmt:message
+                                key="label.sign.out"/></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul
+
+            <roles:notguest principal="${pageContext.request.userPrincipal}">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="${contextPath}/main">${pageContext.request.userPrincipal.getName()}</a></li>
+                </ul>
+            </roles:notguest>
+
+
+            <%--avatar--%>
+            <roles:notguest principal="${pageContext.request.userPrincipal}">
+                <ul class="nav navbar-nav navbar-right">
+                    <a class="head" data-toggle="modal" data-target="#changeAvatarModal">
+                        <img class="img-circle" height="45" width="45"
+                             src="${contextPath}/user/loadAvatar"
+                             alt="Avatar">
+                    </a>
+                </ul>
+            </roles:notguest>
+>>>>>>> new-start
 
 
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </header>
+<<<<<<< HEAD
 
+=======
+<roles:guest principal="${pageContext.request.userPrincipal}">
+    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="${contextPath}/login" class="form-signin">
+                        <h2 class="form-heading"><fmt:message key="label.sign.in"/></h2>
+                        <div class="form-group ${error != null ? 'has-error' : ''}">
+                                <%--<span>${message}</span>--%>
+                            <input name="username"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="<fmt:message key="label.email.example"/>"/>
+                            <input name="password"
+                                   type="password"
+                                   class="form-control"
+                                <%--pattern="^.*(?=^.{6,}$)(?=.*[a-zа-яё]+)(?=.*[0-9]+).*$"--%>
+                                   placeholder="<fmt:message key="label.password"/>"/>
+                            <span>${error}</span>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                                <fmt:message key="label.submit"/>
+                            </button>
+                        </div>
+                    </form>
+                        <%--(?=.*[A-ZА-ЯЁ]+)--%>
+                </div>
+            </div>
+        </div>
+    </div>
+</roles:guest>
+
+<roles:notguest principal="${pageContext.request.userPrincipal}">
+    <div class="modal fade" id="changeAvatarModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title"><fmt:message key="label.avatar"/></h4>
+                </div>
+                <div class="modal-body">
+                    <h4 class="text-center">
+                        <img class="img-circle" height="300" width="300"
+                             src="${contextPath}/user/loadAvatar"
+                             alt="Avatar">
+                    </h4>
+                    <h4 class="text-center">
+                        <form id="changeAvatarForm" action="${contextPath}/user/changeAvatar" method="post"
+                              enctype="multipart/form-data">
+                            <div class="form-group-lg">
+                                <input id="changeAvatar" type="file" name="avatar" class="form-control">
+                            </div>
+                        </form>
+                    </h4>
+                </div>
+                <div class="modal-footer">
+                    <form id="resetAvatarForm" action="${contextPath}/user/resetAvatar" method="post">
+                        <button type="submit" class="btn btn-default pull-left">
+                            <fmt:message key="label.reset"/></button>
+                        <button type="submit" form="changeAvatarForm"
+                                class="btn btn-primary pull-right"><fmt:message
+                                key="label.submit"/></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</roles:notguest>
+
+<%---------------%>
+<%--
+>>>>>>> new-start
 <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -153,6 +308,7 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 </div>
 
 <div class="modal fade" id="signInModal" tabindex="-1" role="dialog">
@@ -246,3 +402,6 @@
     </div>
 </div>
 --%>
+=======
+</div>--%>
+>>>>>>> new-start

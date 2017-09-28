@@ -9,20 +9,39 @@
 
     <http auto-config="true">
         <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <!--<intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>-->
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+<<<<<<< HEAD
+=======
+
+        <form-login login-page="/main"
+                    default-target-url="/main"
+                    authentication-failure-url="/main?error"
+                    authentication-success-handler-ref="authSuccessHandler"
+                    username-parameter="username"
+                    password-parameter="password"/>
+        <logout logout-success-url="/main?logout"/>
+        <csrf disabled="true"/>
+>>>>>>> new-start
     </http>
 <<<<<<< HEAD
 =======
 
+
     <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDetailsServiceImpl">
-            <password-encoder ref="encoder"></password-encoder>
+            <password-encoder ref="encoder"/>
         </authentication-provider>
     </authentication-manager>
 
+    <beans:bean id="authSuccessHandler" class="by.itransition.pandora.security.AuthenticationSuccessHandlerImpl"/>
+
     <beans:bean id="userDetailsServiceImpl"
+<<<<<<< HEAD
                 class="by.itransition.pandora.security.UserDetailsServiceImpl"></beans:bean>
+=======
+                class="by.itransition.pandora.security.UserDetailsServiceImpl"/>
+>>>>>>> new-start
 
     <beans:bean id="encoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">

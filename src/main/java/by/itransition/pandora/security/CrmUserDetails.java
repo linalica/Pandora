@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package by.itransition.pandora.security;
 
 /**
@@ -5,6 +6,11 @@ package by.itransition.pandora.security;
  * @version 1.0
  */
 
+=======
+/*
+package by.itransition.pandora.security;
+
+>>>>>>> new-start
 import by.itransition.pandora.model.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,10 +22,20 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+<<<<<<< HEAD
 /**
  * @author ikatlinsky
  * @since 3/29/17
  */
+=======
+*/
+/**
+ * @author Gulevich Ulyana
+ * @version 1.0
+ *//*
+
+
+>>>>>>> new-start
 @NoArgsConstructor
 @Getter
 public class CrmUserDetails implements UserDetails {
@@ -103,3 +119,7 @@ public class CrmUserDetails implements UserDetails {
                 '}';
     }
 }
+<<<<<<< HEAD
+=======
+*/
+>>>>>>> new-start
