@@ -1,52 +1,89 @@
 package by.itransition.pandora.controller;
 
 import by.itransition.pandora.model.User;
-import by.itransition.pandora.service.SecurityService;
+<<<<<<< HEAD
+import by.itransition.pandora.repository.UserRepository;
 import by.itransition.pandora.service.UserService;
+=======
+import by.itransition.pandora.model.Visitor;
+import by.itransition.pandora.security.SecurityService;
+import by.itransition.pandora.service.UserService;
+import by.itransition.pandora.util.URIAnalyzer;
 import by.itransition.pandora.validator.UserValidator;
+>>>>>>> actual-database
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Gulevich Ulyana
+ * @author Ematinov Kirill
  * @version 1.0
  */
-@Controller
+
+
+@RestController
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    UserRepository userRepository;
 
     @Autowired
-    private SecurityService securityService;
+    UserService userService;
 
-    @Autowired
-    private UserValidator userValidator;
+    @RequestMapping(value = "/lol",  method = RequestMethod.POST)
+    String lol(String s) {
+        User user = userRepository.findByUsername("proselyte5");
+        System.out.println("POST lol: " + user);
+        /*List<UserListDto> users = userService.findAll();
+        Iterator<UserListDto> it = users.iterator();
+        while(it.hasNext()){
+            System.out.println("- | " + it.next());
+        }*/
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model) {
-        model.addAttribute("userForm", new User());
-        return "registration";
+        return "Hello, my darling!";
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        userValidator.validate(userForm, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
-        userService.save(userForm);
-        securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
-        return "redirect:/welcome";
+    @RequestMapping(value = "/lol",  method = RequestMethod.GET)
+    String lol() {
+        User user = userRepository.findByUsername("proselyte5");
+        System.out.println("GET lol: " + user);
+        /*List<UserListDto> users = userService.findAll();
+        Iterator<UserListDto> it = users.iterator();
+        while(it.hasNext()){
+            System.out.println("- | " + it.next());
+        }*/
+
+        return "Hello, my darling!";
     }
 
+<<<<<<< HEAD
+    @RequestMapping("/hello/{name}")
+    String hello(@PathVariable String name) {
+        return "Hello, " + name + "!";
+    }
+
+}
+
+/*
+@PostMapping(value = "/login")
+    @ResponseStatus(value = HttpStatus.OK)
+    public LoginResponseDto login(@RequestBody final LoginRequestDto loginRequestDto) {
+
+        return authenticationService.login(loginRequestDto);
+=======
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
+    public String login(Model model, String error, String logout, HttpServletRequest request) {
+       /* String username = securityService.findLoggedInUsername();
+        System.err.println("-- username: " + username);
+        userService.updateLastLoginByUsername(securityService.findLoggedInUsername());
+        System.err.println("-- lastLogin: " + userService.findByUsername(securityService.findLoggedInUsername()).getLastLoginTime());*/
+
+        request.getSession().setAttribute(ControllerConstants.LOCALE_KEY, ControllerConstants.DEFAULT_LOCALE);
         if (error != null) {
             model.addAttribute("error", "Username or password is incorrect.");
         }
@@ -58,13 +95,39 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
-
         return "welcome";
+>>>>>>> actual-database
     }
 
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String admin(Model model) {
-        return "admin";
+    @GetMapping(value = "/me")
+    @ResponseStatus(value = HttpStatus.OK)
+    public AuthUserDto me() {
+        return authenticationService.getMe();
+    }
+
+<<<<<<< HEAD
+
+    @Bean
+    public CommandLineRunner bootstrap() {
+        return (args) -> {
+            System.out.println("--------------It is CommandLineRunner!");
+        };
+    }*/
+
+
+
+
+
+=======
+    @RequestMapping(value = "/locale", method = RequestMethod.GET)
+    public String locale(/*Principal principal,*/ HttpServletRequest request, String locale) {
+        String username = securityService.findLoggedInUsername();
+        if (username != null) {
+            userService.updateLocaleByUsername(securityService.findLoggedInUsername(), locale);
+        }
+        ((Visitor) request.getSession().getAttribute(ControllerConstants.VISITOR_KEY)).setLocale(locale);
+        return "redirect:" + URIAnalyzer.getCurrentPage(request);
     }
 
 }
+>>>>>>> actual-database
